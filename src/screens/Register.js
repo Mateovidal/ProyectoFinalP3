@@ -14,9 +14,6 @@ import {auth} from '../firebase/config'
     }
 
 
-
-
-
     render() {
         return (
 
@@ -39,14 +36,14 @@ import {auth} from '../firebase/config'
 
                 <TextInput
                 onChangeText={(text)=>this.setState({password: text})}
-                placeholder = "email"
-                keyboardType="email-adress"
+                placeholder = "password"
+                keyboardType="default"
                 secureTextEntry={true}
                 />
 
                 <TouchableOpacity
                 style={styles.button}
-                onPress={()=> this.props.register(this.state.name, this.state.email, this.state.password)}
+                onPress={()=> this.props.register(this.state.email, this.state.password)}
                 
                 >
 

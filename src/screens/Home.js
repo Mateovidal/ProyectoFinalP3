@@ -13,7 +13,7 @@ import { Text, View } from 'react-native'
         return (
             <View>
                 <Text> Home </Text>
-                <Text> Home </Text>
+                
             </View>
         )
     }
