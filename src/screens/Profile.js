@@ -20,7 +20,7 @@ class Profile extends Component{
             <Text> Última sesión: {auth.currentUser.metadata.lastSignInTime} </Text>
             <TouchableOpacity
               style={styles.button}
-              onPress={() => this.props.signOut()}
+              onPress={() => this.props.logout()}
             >
               <Text style={styles.textButton}> Cerrar sesión </Text>
             </TouchableOpacity>

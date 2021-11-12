@@ -40,31 +40,31 @@ class Menu extends Component {
 // no tenemos forma de pasarle la info del usuario al componente de perfil, si lo twngo en menu le peudo vargar la user data en un estado, 
 
 
-        // recibimos email y pass
+    // recibimos email y pass
 
-        register(email, password) {
-            auth
-            .createUserWithEmailAndPassword(email, password)
-            .then((userData) => {
-                this.setState({
-                    loggedIn: true, 
-                    userData: userData.user, 
-                })
+    register(email, password) {
+        auth
+        .createUserWithEmailAndPassword(email, password)
+        .then((userData) => {
+            this.setState({
+                loggedIn: true, 
+                userData: userData.user, 
             })
-            .catch((err) => {
-                this.setState({
-                    error: err.message
-                })
+        })
+        .catch((err) => {
+            this.setState({
+                error: err.message
             })
-        }
+        })
+    }
 
-login(email, password) {
+    login(email, password) {
         auth
         .signInWithEmailAndPassword(email, password)
         .then((userData) => {
             this.setState({
                 loggedIn: true, 
-                userData: userData,
+                userData: userData.user,
             })
         })
         .catch((err) => {
@@ -75,20 +75,24 @@ login(email, password) {
     }
 
     logout(){
-            auth.signOut()
-            .then(()=> {
-
-                this.state({
-
-                    loggedIn: false,
-                    userData: '',
-                })
+        auth.signOut()
+        .then(()=> {
+            this.state({
+                loggedIn: false,
+                userData: '',
             })
+        })
+        .catch((err) => {
+            this.setState({
+                error: err.message
+            })
+        })
     }
 
     render(){
+        console.log(this.state.userData.user);
         return(
-            <NavigationContainer> 
+            <NavigationContainer independent={true}> 
                 {/*se puede componentizar el NavigationContainer en app*/}
                 <Drawer.Navigator>
                     {(this.state.loggedIn === false) ? (
@@ -99,7 +103,7 @@ login(email, password) {
                     ):(
                         <>
                             <Drawer.Screen name="Home" component={()=> <Home />}/>
-                            <Drawer.Screen name="Mi Perfil" component={() => <Profile userData={this.state.userData} signOut ={() => this.signOut() }/>}/>
+                            <Drawer.Screen name="Mi Perfil" component={() => <Profile userData={this.state.userData} logout={() => this.logout()} />} />
                             <Drawer.Screen name="New Post" component={()=> <NewPostForm/>}/>
 
                         </>
