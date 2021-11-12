@@ -10,7 +10,7 @@ import { Text, View, TextInput, TouchableOpacity, StyleSheet, } from "react-nati
             email: '', 
             password: '' ,
             loggedIn: false,
-            // error:'',
+            
         }
     }
 

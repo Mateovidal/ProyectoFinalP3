@@ -6,6 +6,7 @@ import {auth} from '../firebase/config'
 import Home from '../screens/Home';
 import Login from '../screens/Login';
 import Register from '../screens/Register';
+import Profile from '../screens/Profile'
 
 // es para la configuracion
 const Drawer = createDrawerNavigator();
@@ -14,11 +15,25 @@ class Menu extends Component {
 
     constructor(props){
         super(props);
-        this.setState= {
+        this.state= {
             loggedIn: false,
             userData: {},
             error: '', 
         };
+    }
+
+    componentDidMount(){
+        auth.onAuthStateChanged((user) => {
+            if (user !== null) {
+                this.setState({
+                    loggedIn: true, 
+                })
+            } else{
+                this.setState({
+                    loggedIn: false, 
+                })
+            }
+        })
     }
 
 
@@ -27,8 +42,8 @@ class Menu extends Component {
 
         // recibimos email y pass
 
-register(email, password) {
-        auth
+        register(email, password) {
+            auth
             .createUserWithEmailAndPassword(email, password)
             .then((userData) => {
                 this.setState({
@@ -41,41 +56,62 @@ register(email, password) {
                     error: err.message
                 })
             })
-    }
-login(email, password) {
-    auth
-    .signInWithEmailAndPassword(email, password)
-    .then((userData) => {
-        this.setState({
-            loggedIn: true, 
-            userData: userData,
-        })
-    })
-    .catch((err) => {
-        this.setState({
-            error: err.message
-        })
-    })
-}
+        }
 
+login(email, password) {
+        auth
+        .signInWithEmailAndPassword(email, password)
+        .then((userData) => {
+            this.setState({
+                loggedIn: true, 
+                userData: userData,
+            })
+        })
+        .catch((err) => {
+            this.setState({
+                error: err.message
+            })
+        })
+    }
+
+    logout(){
+            auth.signOut()
+            .then(()=> {
+
+                this.state({
+
+                    loggedIn: false,
+                    userData: '',
+                })
+            })
+    }
 
     render(){
-        return (
+        return(
+            <NavigationContainer> 
+                {/*se puede componentizar el NavigationContainer en app*/}
+                <Drawer.Navigator>
+                    {(this.state.loggedIn === false) ? (
+                        <>
+                            <Drawer.Screen name="Login" component={() => <Login  error={this.state.error} login={(email, pass) => this.login(email,pass)} />} /> 
+                            <Drawer.Screen name="Register" component={() => <Register error={this.state.error} register={(email, pass) => this.register(email,pass)} />} /> 
+                        </>
+                    ):(
+                        <>
+                            <Drawer.Screen name="Home" component={()=> <Home />}/>
+                            <Drawer.Screen name="Mi Perfil" component={() => <Profile userData={this.state.userData} signOut ={() => this.signOut() }/>}/>
+                            <Drawer.Screen name="New Post" component={()=> <NewPostForm/>}/>
 
-        // contenedor de toda la navegacion
-
-        // le pasamos por prop a un componente el metodo con arrow function
-
-            
-            <Drawer.Navigator>
-                <Drawer.Screen name="Home" component={()=> <Home/>} />
-                <Drawer.Screen name="Login" component={() => <Login  login={(email, pass) => this.login(email,pass)} />} /> 
-                <Drawer.Screen name="Register" component={()=> <Register error={this.state.error} register={(email, password)=> this.register(email, password)}/>}/>
-            </Drawer.Navigator>
-           
-        );
-
+                        </>
+                            
+                    )
+                    }
+                </Drawer.Navigator>
+            </NavigationContainer>
+        )
     }
+
+
 }
 
 export default Menu;
