@@ -12,11 +12,12 @@ const Drawer = createDrawerNavigator();
 
 class Menu extends Component {
 
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
         this.setState= {
             loggedIn: false,
             userData: {},
+            error: '', 
         };
     }
 
@@ -25,13 +26,36 @@ class Menu extends Component {
 
 
         // recibimos email y pass
-register(email, password){
 
-    // recibe el email y el pass va a fb y lo agrega
+register(email, password) {
+        auth
+            .createUserWithEmailAndPassword(email, password)
+            .then((userData) => {
+                this.setState({
+                    loggedIn: true, 
+                    userData: userData.user, 
+                })
+            })
+            .catch((err) => {
+                this.setState({
+                    error: err.message
+                })
+            })
+    }
+login(email, password) {
     auth
-    .createUserWithEmailAndPassword(email, password)
-    .then((userData)=> console.log(userData))
-    .catch ((err)=> console.log(err))
+    .signInWithEmailAndPassword(email, password)
+    .then((userData) => {
+        this.setState({
+            loggedIn: true, 
+            userData: userData,
+        })
+    })
+    .catch((err) => {
+        this.setState({
+            error: err.message
+        })
+    })
 }
 
 
@@ -45,8 +69,8 @@ register(email, password){
             
             <Drawer.Navigator>
                 <Drawer.Screen name="Home" component={()=> <Home/>} />
-                <Drawer.Screen name="Login" component={()=> <Login/>}/>
-                <Drawer.Screen name="Register" component={()=> <Register register={(email, password)=> this.register(email, password)}/>}/>
+                <Drawer.Screen name="Login" component={() => <Login  login={(email, pass) => this.login(email,pass)} />} /> 
+                <Drawer.Screen name="Register" component={()=> <Register error={this.state.error} register={(email, password)=> this.register(email, password)}/>}/>
             </Drawer.Navigator>
            
         );
