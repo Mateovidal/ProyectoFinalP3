@@ -7,6 +7,7 @@ import Home from '../screens/Home';
 import Login from '../screens/Login';
 import Register from '../screens/Register';
 import Profile from '../screens/Profile'
+import NewPostForm from "../screens/NewPostForm";
 
 // es para la configuracion
 const Drawer = createDrawerNavigator();
@@ -26,7 +27,8 @@ class Menu extends Component {
         auth.onAuthStateChanged((user) => {
             if (user !== null) {
                 this.setState({
-                    loggedIn: true, 
+                    loggedIn: true,
+                    userData: user
                 })
             } else{
                 this.setState({
@@ -77,7 +79,7 @@ class Menu extends Component {
     logout(){
         auth.signOut()
         .then(()=> {
-            this.state({
+            this.setState({
                 loggedIn: false,
                 userData: '',
             })
@@ -90,15 +92,21 @@ class Menu extends Component {
     }
 
     render(){
-        console.log(this.state.userData.user);
+        console.log(this.state.userData);
         return(
             <NavigationContainer independent={true}> 
                 {/*se puede componentizar el NavigationContainer en app*/}
                 <Drawer.Navigator>
                     {(this.state.loggedIn === false) ? (
                         <>
-                            <Drawer.Screen name="Login" component={() => <Login  error={this.state.error} login={(email, pass) => this.login(email,pass)} />} /> 
-                            <Drawer.Screen name="Register" component={() => <Register error={this.state.error} register={(email, pass) => this.register(email,pass)} />} /> 
+                            <Drawer.Screen name="Login" component={() => <Login  
+                                                                            error={this.state.error}   
+                                                                            login={(email, pass) => this.login(email,pass)}/>}
+                            /> 
+                            <Drawer.Screen name="Register" component={() => <Register 
+                                                                                error={this.state.error} 
+                                                                                register={(email, pass) => this.register(email,pass)} />} 
+                            /> 
                         </>
                     ):(
                         <>
