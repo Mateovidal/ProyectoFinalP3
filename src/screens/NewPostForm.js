@@ -8,42 +8,17 @@ class NewPostForm extends Component {
     constructor(props){
         super(props)
         this.state = {
-            titulo: '',
-            descripcion: '',
+            title: '',
+            description: '',
         };
     }
 
-    // db.collection('posts').add({
-
-    //     owner: auth.currentUser.email,
-    //     descripcion: this.state.descripcion,
-    //     createadAt: Date.now()
-    // })
-    // .then()
-    // .catch( e => console.log(e))
-
-    // db.collection('posts').onSnapshot(
-    //     docs =>{
-    //         let posts = []
-    //         docs.forEach( doc => {
-    //             console.log(doc);
-    //             posts.push({
-    //                 id: doc.id,
-    //                 data: doc.data()
-    //             })
-    //         })
-    //         this.setState({
-    //             posteos: posts,
-    //             loading: false
-    //         })
-    //     }
-    // )
 
     submitPost(){
         db.collection("posteos").add({
             user: auth.currentUser.email, 
-            descripcion: this.state.descripcion, 
-            titulo: this.state.titulo, 
+            description: this.state.descripcion, 
+            title: this.state.title, 
             createdAt: Date.now(), 
             likes: [], 
             comentarios: [],
@@ -59,54 +34,24 @@ class NewPostForm extends Component {
         })
     }
 
-//     render() {
-//         return (
-//             <View>
-//                 <TextInput
-//                     placeholder='Título'
-//                     keyboardType='default'
-//                     onChangeText={ text => this.setState({
-//                         title: text
-//                     })}
-//                     value={this.state.title}
-//                     style={styles.input}
-//                 />
-//                 <TextInput
-//                     placeholder='Descripción'
-//                     keyboardType='default'
-//                     onChangeText={ text => this.setState({
-//                         description: text
-//                     })}
-//                     value={this.state.description}
-//                     multiline={true}
-//                     style={styles.input}
-//                 />
-//                 <TouchableOpacity style={styles.button} onPress={() => console.log('post')}>
-//                     <Text style={styles.textButton}>
-//                         Postear
-//                     </Text>
-//                 </TouchableOpacity>
-//             </View>
-//         )
-//     }
-// }
+
 
 render() {
     return (
       <View style={styles.formContainer}>
         <Text> Nuevo Post </Text>
         <TextInput
-          onChangeText={(text) => this.setState({ titulo: text})}
+          onChangeText={(text) => this.setState({ title: text})}
           placeholder="Titulo"
           keyboardType="default"
-          value={this.state.titulo}
+          value={this.state.title}
           style={styles.multilineInput}
         />
         <TextInput
-          onChangeText={(text) => this.setState({ descripcion: text })}
+          onChangeText={(text) => this.setState({ description: text })}
           placeholder="Descripción"
           keyboardType="default"
-          value={this.state.descripcion}
+          value={this.state.description}
           multiline
           style={styles.multilineInput}
         />
