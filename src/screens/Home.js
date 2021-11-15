@@ -41,7 +41,8 @@ class Home extends Component {
                 <FlatList 
                     data={this.state.posts}
                     keyExtractor={(post) => post.id}
-                    renderItem={({item}) => <Post
+                    renderItem={({item}) => 
+                    <Post
                         postData={item}
                     />}
                 />

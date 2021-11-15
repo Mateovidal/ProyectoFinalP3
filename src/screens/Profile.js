@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Text, View, TextInput, TouchableOpacity, StyleSheet, } from "react-native";
+import { Text, View, TextInput, TouchableOpacity, StyleSheet, FlatList, } from "react-native";
 import { auth } from "../firebase/config";
 
 class Profile extends Component{
@@ -18,6 +18,13 @@ class Profile extends Component{
             <Text> Email usuario: {auth.currentUser.email} </Text>
             <Text> Fecha de creación: {auth.currentUser.metadata.creationTime} </Text>
             <Text> Última sesión: {auth.currentUser.metadata.lastSignInTime} </Text>
+            
+            <Text>Mis Posteos</Text>
+        
+            
+              
+        
+            
             <TouchableOpacity
               style={styles.button}
               onPress={() => this.props.logout()}

@@ -1,32 +1,36 @@
 import React, {Component} from 'react'; 
-import { Text, View, TextInput, TouchableOpacity, StyleSheet, ActivityIndicator, FlatList } from "react-native";
+import { Text, View, TextInput, TouchableOpacity, StyleSheet,Modal, ActivityIndicator, FlatList } from "react-native";
 import { db, auth } from "../firebase/config";
 import firebase from 'firebase';
+import NewCommentForm from '../screens/NewCommentForm';
 
 class Post extends Component{
 constructor(props){
     super(props)
     this.state = {
         likes: 0,
-        liked: false
+        liked: false,
+        showModal: false,
+        comentarios: 0
     }
 }
 
 
 componentDidMount() {
     this.receiveLikes();
+    //this.receiveComments();
 };
 
 receiveLikes(){
-    let likes = this.props.postData.data.likes
+    let likesArray = this.props.postData.data.likes
     //cuantos likes?
-    if (likes) {
+    if (likesArray) {
     this.setState({    
-        likes: likes.length
+        likes: likesArray.length
     })  
     }
     //este usuario likeo?
-    if (likes.includes(auth.currentUser.email)
+    if (likesArray.includes(auth.currentUser.email)
     ) {
         this.setState({
         liked: true
@@ -83,6 +87,80 @@ dislikePost(){
     
 }
 
+//traer info 
+// receiveComments(){
+//     let comentarios = this.props.postData.data.comentarios
+
+//     if (comentarios) {
+//     this.setState({    
+//         comentarios: comentarios.length
+//     })  
+//     }
+  
+ 
+
+// }
+
+// commentPost(){
+//     let post  = db.collection("posteos").doc(this.props.postData.id);
+
+//     post.update({
+//         comentarios: firebase.firestore.FieldValue.arrayUnion(auth.currentUser.email)
+//     })
+
+//     .then(() => {
+//         this.setState({
+//             comentarios: this.state.comentarios + 1,
+        
+//     })
+//         console.log("Document successfully updated!");
+//     })
+
+//     .catch((error) => {
+//         // The document probably doesn't exist.
+//         console.error("Error updating document: ", error);
+//     });
+        
+//         console.log('estoy comentando')
+
+// }
+
+// discommentPost(){
+//     let post  = db.collection("posteos").doc(this.props.postData.id);
+
+//     post.update({
+//         comentarios: firebase.firestore.FieldValue.arrayRemove(auth.currentUser.email)
+//     })
+
+//     .then(() => {
+//         this.setState({
+//             comentarios: this.state.comentarios - 1,
+          
+//         })
+//         console.log("Document successfully updated!");
+//     })
+
+//     .catch((error) => {
+//         // The document probably doesn't exist.
+//         console.error("Error updating document: ", error);
+//     });
+   
+//     console.log('estoy descomentando')
+    
+// }
+
+openModal() {
+    this.setState({
+        showModal: true
+    })
+}
+
+closeModal() {
+    this.setState({
+        showModal: false
+    })
+}
+
 
 render(){
     console.log(this.props.postData);
@@ -91,6 +169,8 @@ render(){
   <Text>{this.props.postData.data.user}</Text>
   <Text>{this.props.postData.data.description}</Text>
   <Text>{this.state.likes}</Text>
+  
+  
   
   {
      !this.state.liked ?
@@ -109,6 +189,30 @@ render(){
         </TouchableOpacity>
 
 
+  }
+
+<TouchableOpacity style={styles.button2} onPress={() => this.openModal()}>
+    <Text>Add Comment</Text>
+  </TouchableOpacity>
+
+
+  {
+      !this.state.showModal ?
+      null
+      :
+      <Modal
+            visible={this.state.showModal}
+            animationType="slide"
+            transparent={false}
+        >
+            <TouchableOpacity onPress={
+                () => this.closeModal()}>
+                    <Text>X</Text>
+                    </TouchableOpacity>
+                   {/* <NewCommentForm  commentArray={this.props.postData.data.comentarios}/> */}
+          
+
+        </Modal>
   }
 </View>
 
@@ -130,6 +234,16 @@ const styles = StyleSheet.create({
     },
     button: {
         backgroundColor: "#28a745",
+        paddingHorizontal: 10,
+        paddingVertical: 6,
+        textAlign: "center",
+        borderRadius: 4,
+        borderWidth: 1,
+        borderStyle: "solid",
+        borderColor: "#28a745",
+    },
+    button2: {
+        backgroundColor: "#0000ff",
         paddingHorizontal: 10,
         paddingVertical: 6,
         textAlign: "center",
