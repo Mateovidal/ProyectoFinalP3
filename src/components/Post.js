@@ -11,7 +11,7 @@ constructor(props){
         likes: 0,
         liked: false,
         showModal: false,
-        comentarios: 0
+      //  comentarios: 0
     }
 }
 
@@ -22,20 +22,20 @@ componentDidMount() {
 };
 
 receiveLikes(){
-    let likesArray = this.props.postData.data.likes
+    let likes = this.props.postData.data.likes
     //cuantos likes?
-    if (likesArray) {
+    if (likes) {
     this.setState({    
-        likes: likesArray.length
+        likes: likes.length
     })  
     }
     //este usuario likeo?
-    if (likesArray.includes(auth.currentUser.email)
-    ) {
-        this.setState({
-        liked: true
-    })
-    }
+    // if (likes.includes(auth.currentUser.email)
+    // ) {
+    //     this.setState({
+    //     liked: true
+    // })
+    // }
 
 }
 
@@ -149,17 +149,17 @@ dislikePost(){
     
 // }
 
-openModal() {
-    this.setState({
-        showModal: true
-    })
-}
+// openModal() {
+//     this.setState({
+//         showModal: true
+//     })
+// }
 
-closeModal() {
-    this.setState({
-        showModal: false
-    })
-}
+// closeModal() {
+//     this.setState({
+//         showModal: false
+//     })
+// }
 
 
 render(){
@@ -191,29 +191,11 @@ render(){
 
   }
 
-<TouchableOpacity style={styles.button2} onPress={() => this.openModal()}>
+<TouchableOpacity style={styles.button2} >
     <Text>Add Comment</Text>
   </TouchableOpacity>
 
 
-  {
-      !this.state.showModal ?
-      null
-      :
-      <Modal
-            visible={this.state.showModal}
-            animationType="slide"
-            transparent={false}
-        >
-            <TouchableOpacity onPress={
-                () => this.closeModal()}>
-                    <Text>X</Text>
-                    </TouchableOpacity>
-                   {/* <NewCommentForm  commentArray={this.props.postData.data.comentarios}/> */}
-          
-
-        </Modal>
-  }
 </View>
 
 
