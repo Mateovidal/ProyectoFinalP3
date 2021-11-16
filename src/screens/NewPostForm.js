@@ -17,7 +17,7 @@ class NewPostForm extends Component {
     submitPost(){
         db.collection("posteos").add({
             user: auth.currentUser.email, 
-            description: this.state.descripcion, 
+            description: this.state.description, 
             title: this.state.title, 
             createdAt: Date.now(), 
             likes: [], 

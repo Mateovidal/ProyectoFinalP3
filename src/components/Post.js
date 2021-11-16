@@ -18,7 +18,7 @@ constructor(props){
 
 componentDidMount() {
     this.receiveLikes();
-    //this.receiveComments();
+    this.receiveComments();
 };
 
 receiveLikes(){
@@ -87,79 +87,79 @@ dislikePost(){
     
 }
 
-//traer info 
-// receiveComments(){
-//     let comentarios = this.props.postData.data.comentarios
 
-//     if (comentarios) {
-//     this.setState({    
-//         comentarios: comentarios.length
-//     })  
-//     }
+receiveComments(){
+    let comentarios = this.props.postData.data.comentarios
+
+    if (comentarios) {
+    this.setState({    
+        comentarios: comentarios.length
+    })  
+    }
   
  
 
-// }
+}
 
-// commentPost(){
-//     let post  = db.collection("posteos").doc(this.props.postData.id);
+commentPost(){
+    let post  = db.collection("posteos").doc(this.props.postData.id);
 
-//     post.update({
-//         comentarios: firebase.firestore.FieldValue.arrayUnion(auth.currentUser.email)
-//     })
+    post.update({
+        comentarios: firebase.firestore.FieldValue.arrayUnion(auth.currentUser.email)
+    })
 
-//     .then(() => {
-//         this.setState({
-//             comentarios: this.state.comentarios + 1,
+    .then(() => {
+        this.setState({
+            comentarios: this.state.comentarios + 1,
         
-//     })
-//         console.log("Document successfully updated!");
-//     })
+    })
+        console.log("Document successfully updated!");
+    })
 
-//     .catch((error) => {
-//         // The document probably doesn't exist.
-//         console.error("Error updating document: ", error);
-//     });
+    .catch((error) => {
+        // The document probably doesn't exist.
+        console.error("Error updating document: ", error);
+    });
         
-//         console.log('estoy comentando')
+        console.log('estoy comentando')
 
-// }
+}
 
-// discommentPost(){
-//     let post  = db.collection("posteos").doc(this.props.postData.id);
+discommentPost(){
+    let post  = db.collection("posteos").doc(this.props.postData.id);
 
-//     post.update({
-//         comentarios: firebase.firestore.FieldValue.arrayRemove(auth.currentUser.email)
-//     })
+    post.update({
+        comentarios: firebase.firestore.FieldValue.arrayRemove(auth.currentUser.email)
+    })
 
-//     .then(() => {
-//         this.setState({
-//             comentarios: this.state.comentarios - 1,
+    .then(() => {
+        this.setState({
+            comentarios: this.state.comentarios - 1,
           
-//         })
-//         console.log("Document successfully updated!");
-//     })
+        })
+        console.log("Document successfully updated!");
+    })
 
-//     .catch((error) => {
-//         // The document probably doesn't exist.
-//         console.error("Error updating document: ", error);
-//     });
+    .catch((error) => {
+        // The document probably doesn't exist.
+        console.error("Error updating document: ", error);
+    });
    
-//     console.log('estoy descomentando')
+    console.log('estoy descomentando')
     
-// }
+}
 
-// openModal() {
-//     this.setState({
-//         showModal: true
-//     })
-// }
+openModal() {
+    this.setState({
+        showModal: true
+    })
+}
 
-// closeModal() {
-//     this.setState({
-//         showModal: false
-//     })
-// }
+closeModal() {
+    this.setState({
+        showModal: false
+    })
+}
 
 
 render(){
@@ -191,10 +191,23 @@ render(){
 
   }
 
-<TouchableOpacity style={styles.button2} >
+<TouchableOpacity style={styles.button2} onPress={() => this.openModal()}>
     <Text>Add Comment</Text>
   </TouchableOpacity>
 
+{
+    !this.state.showModal ?
+    null 
+    :
+    <Modal>
+        <TouchableOpacity style={styles.button2} onPress={() => this.closeModal()}>
+            <Text>X</Text>
+        </TouchableOpacity>
+        
+            <NewCommentForm commentData={this.props.postData}/>
+    </Modal> 
+
+}
 
 </View>
 
