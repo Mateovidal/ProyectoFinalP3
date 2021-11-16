@@ -1,18 +1,40 @@
 import React, { Component } from "react";
 import { Text, View, TextInput, TouchableOpacity, StyleSheet, FlatList, } from "react-native";
-import { auth } from "../firebase/config";
+import { auth, db } from "../firebase/config";
 
-class Profile extends Component{
-
-    constructor(props) {
-      super(props);
+class Profile extends Component {
+  constructor(props) {
+    super(props);
       this.state = { 
-
+        posts: []
       }  
-    }
+  }
+
+  componentDidMount(){
+    this.showPost()
+  }
+
+    showPost() {
+      db.collection('posteos').where('user','==', auth.currentUser.email)
+      .orderBy('createdAt', 'desc')
+      // .limit(2)
+      .onSnapshot((docs) => {
+          let posteos = []
+          docs.forEach((doc) => {
+              posteos.push({
+                  id: doc.id,
+                  data: doc.data()
+              })
+          })
+          this.setState({
+              posts: posteos
+          })
+      })
+  }
 
   
     render() {
+      console.log(this.state.posts);
         return (
           <View>
             <Text> Email usuario: {auth.currentUser.email} </Text>
@@ -21,7 +43,7 @@ class Profile extends Component{
             
             <Text>Mis Posteos</Text>
         
-            
+            {/* flatlist para mostrar posteos */}
               
         
             

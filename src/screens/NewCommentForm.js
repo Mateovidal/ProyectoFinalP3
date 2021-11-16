@@ -7,11 +7,12 @@ class NewCommentForm extends Component {
 
     constructor(props){
         super(props)
+        
         this.state = {
             comment:'',
             comments:0,
             comentarios:[]
-        };
+        }
     }
 
 
@@ -19,7 +20,7 @@ class NewCommentForm extends Component {
     let post  = db.collection("posteos").doc(this.props.commentData.id);
 
     post.update({
-        comentarios: firebase.firestore.FieldValue.arrayUnion(auth.currentUser.email)
+        comentarios: firebase.firestore.FieldValue.arrayUnion(this.state.comment)
     })
 
     .then(() => {
@@ -43,19 +44,19 @@ class NewCommentForm extends Component {
 
  render() {
     
- console.log(this.props.commentData.data);
+//  console.log(this.props.commentData.data);
  return (
       <View style={styles.formContainer}>
         
         <Text> Comentarios: {this.state.comments} </Text>
-        <FlatList>
-                data={this.props.commentData.id.comentarios}
+        <FlatList
+                data={this.state.comentarios}
                 keyExtractor={(comment) => comment.id}
                 renderItem={({item}) => 
                     <Comment
                         commentData={item}
                     />}
-            </FlatList>
+        />
         <Text> Nuevo Comentario </Text>
         <TextInput
           onChangeText={(text) => this.setState({ comment: text})}
