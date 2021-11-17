@@ -111,8 +111,8 @@ class Menu extends Component {
                     ):(
                         <>
                             <Drawer.Screen name="Home" component={()=> <Home />}/>
-                            <Drawer.Screen name="Mi Perfil" component={() => <Profile logout={() => this.logout()} />} />
                             <Drawer.Screen name="New Post" component={()=> <NewPostForm/>}/>
+                            <Drawer.Screen name="Mi Perfil" component={() => <Profile logout={() => this.logout()} />} />
 
                         </>
                             

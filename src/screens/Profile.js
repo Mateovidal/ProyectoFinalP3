@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Text, View, TextInput, TouchableOpacity, StyleSheet, FlatList, } from "react-native";
 import { auth, db } from "../firebase/config";
+import Post from '../components/Post'
 
 class Profile extends Component {
   constructor(props) {
@@ -44,6 +45,14 @@ class Profile extends Component {
             <Text>Mis Posteos</Text>
         
             {/* flatlist para mostrar posteos */}
+            <FlatList 
+                    data={this.state.posts}
+                    keyExtractor={(post) => post.id}
+                    renderItem={({item}) => 
+                    <Post
+                        postData={item}
+                    />}
+                />
               
         
             

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Text, View, TextInput, StyleSheet, TouchableOpacity } from 'react-native'
+import MyCamera from '../components/MyCamera';
 import {db, auth} from "../firebase/config"
 
 
@@ -10,6 +11,7 @@ class NewPostForm extends Component {
         this.state = {
             title: '',
             description: '',
+            showCamera: true
         };
     }
 
@@ -38,6 +40,8 @@ class NewPostForm extends Component {
 
 render() {
     return (
+        this.state.showCamera ?
+        <MyCamera /> :
       <View style={styles.formContainer}>
         <Text> Nuevo Post </Text>
         <TextInput
