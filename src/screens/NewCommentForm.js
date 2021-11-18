@@ -17,10 +17,17 @@ class NewCommentForm extends Component {
 
 
   submitComment(){
-    let post  = db.collection("posteos").doc(this.props.commentData.id);
+    let post  = db.collection("posteos").doc(this.props.postData.id);
 
     post.update({
-        comentarios: firebase.firestore.FieldValue.arrayUnion(this.state.comment)
+        comentarios: firebase.firestore.FieldValue.arrayUnion({
+            user: auth.currentUser.email,
+            comment: this.state.comment,
+            createdAt: Date.now(),
+            //id: this.props.postData.data.comentarios.length + auth.currentUser.email
+
+            }
+            )
     })
 
     .then(() => {
@@ -40,18 +47,20 @@ class NewCommentForm extends Component {
     
     }
 
+    
+
 
 
  render() {
     
-//  console.log(this.props.commentData.data);
+ console.log(this.props.postData.data);
  return (
       <View style={styles.formContainer}>
         
-        <Text> Comentarios: {this.state.comments} </Text>
+        <Text> Comentarios: {this.props.postData.data.comentarios.length} </Text>
         <FlatList
-                data={this.state.comentarios}
-                keyExtractor={(comment) => comment.id}
+                data={this.props.postData.data.comentarios}
+                keyExtractor={(comment) => comment.createdAt}
                 renderItem={({item}) => 
                     <Comment
                         commentData={item}

@@ -13,7 +13,7 @@ class Comment extends Component {
         return (
             <View>
                 {/* <Text>{this.props.commentNumber}</Text> */}
-                <Text> {this.props.commentData.data} </Text>
+                <Text> hola</Text>
             </View>
         )
     }

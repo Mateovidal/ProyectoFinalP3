@@ -193,12 +193,15 @@ render(){
         !this.state.showModal ?
         null 
         :
-        <Modal>
+        <Modal
+        animationType="slide"
+        transparent={true}
+        visible={this.state.showModal}>
             <TouchableOpacity style={styles.button2} onPress={() => this.closeModal()}>
                 <Text>X</Text>
             </TouchableOpacity>
 
-            <NewCommentForm commentData={this.props.postData}/>
+            <NewCommentForm postData={this.props.postData}/>
         </Modal> 
         }
         </View>
