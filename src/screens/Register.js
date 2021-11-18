@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View, TextInput, TouchableOpacity, StyleSheet } from 'react-native'
+import { Text, View, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native'
 import {auth} from '../firebase/config'
 
  class Register extends Component {
@@ -10,6 +10,7 @@ import {auth} from '../firebase/config'
             // name: '',
             email: '',
             password: '',
+            username:""
         }
     }
 
@@ -31,19 +32,46 @@ import {auth} from '../firebase/config'
                 placeholder = "email"
                 keyboardType="email-adress"
                 />
-
+                
+        
                 <TextInput
                 style={styles.input}
-                onChangeText={(text)=>this.setState({password: text})}
+                
+                onChangeText={(text)=>
+                    
+                          this.setState({password: text})}
+                    
+                    
+                   
                 placeholder = "password"
                 keyboardType="default"
                 secureTextEntry={true}
                 />
+                
+                <TextInput
+                style={styles.input}
+                onChangeText={(text)=>this.setState({username: text})}
+                placeholder = "username"
+                keyboardType="email-adress"
+                />
 
                 <TouchableOpacity
                 style={styles.button}
-                onPress={()=> this.props.register(this.state.email, this.state.password)}
+                onPress={()=> this.props.register(this.state.email, this.state.password, this.state.username)}
                 >
+                    {this.state.password.length < 6 ?
+                        Alert.alert(
+                            "Invalid Password",
+                            "Password must have 6+ characters",
+                            [
+                              {
+                                text: "Cancel",
+                                onPress: () => console.log("Cancel Pressed"),
+                                style: "cancel"
+                              },
+                              { text: "OK", onPress: () => console.log("OK Pressed") }
+                            ]
+                          ): null}
 
                     <Text style={styles.textButton}
                     >Registrar</Text>

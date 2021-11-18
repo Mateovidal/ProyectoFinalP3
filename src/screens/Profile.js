@@ -39,6 +39,7 @@ class Profile extends Component {
         return (
           <View>
             <Text> Email usuario: {auth.currentUser.email} </Text>
+            <Text> Username: {this.props.userdata} </Text>
             <Text> Fecha de creación: {auth.currentUser.metadata.creationTime} </Text>
             <Text> Última sesión: {auth.currentUser.metadata.lastSignInTime} </Text>
             

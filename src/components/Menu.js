@@ -3,6 +3,7 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer } from "@react-navigation/native";
 import {auth} from '../firebase/config'
 
+import {Alert} from "react-native"
 import Home from '../screens/Home';
 import Login from '../screens/Login';
 import Register from '../screens/Register';
@@ -44,20 +45,32 @@ class Menu extends Component {
 
     // recibimos email y pass
 
-    register(email, password) {
-        auth
-        .createUserWithEmailAndPassword(email, password)
-        .then((userData) => {
-            this.setState({
-                loggedIn: true, 
-                userData: userData.user, 
+    register(email, password, username) {
+     
+       auth
+            .createUserWithEmailAndPassword(email, password)
+            .then((userData) => {
+                this.setState({
+                    loggedIn: true, 
+                    userData: userData.user, 
+                })
             })
-        })
-        .catch((err) => {
-            this.setState({
-                error: err.message
+            .then(res => {
+                res.user.updateProfile({
+                    displayName: username
+                })
             })
-        })
+            .catch((err) => {
+                this.setState({
+                    error: err.message
+                })
+            })
+
+        
+        
+        
+       
+        console.log(this.state.userData.displayName);
     }
 
     login(email, password) {
@@ -112,7 +125,7 @@ class Menu extends Component {
                         <>
                             <Drawer.Screen name="Home" component={()=> <Home />}/>
                             <Drawer.Screen name="New Post" component={()=> <NewPostForm/>}/>
-                            <Drawer.Screen name="Mi Perfil" component={() => <Profile logout={() => this.logout()} />} />
+                            <Drawer.Screen name="Mi Perfil" component={() => <Profile logout={() => this.logout()} userdata={this.state.userData.displayName}/>} />
 
                         </>
                             
