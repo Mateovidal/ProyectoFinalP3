@@ -3,7 +3,6 @@ import { Text, View, TouchableOpacity } from 'react-native'
 import { Camera } from 'expo-camera'
 
 class MyCamera extends Component {
-
     constructor(props){
         super(props)
         this.state = {
