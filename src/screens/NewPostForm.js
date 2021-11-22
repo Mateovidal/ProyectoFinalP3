@@ -11,7 +11,9 @@ class NewPostForm extends Component {
         this.state = {
             title: '',
             description: '',
-            showCamera: true
+            url: "",
+            showCamera: true,
+            
         };
     }
 
@@ -24,6 +26,7 @@ class NewPostForm extends Component {
             createdAt: Date.now(), 
             likes: [], 
             comentarios: [],
+            photo: this.state.url,
         })
         .then(() => {
             this.setState({
@@ -36,12 +39,21 @@ class NewPostForm extends Component {
         })
     }
 
+    onImageUpload(url) {
+      this.setState({
+        url: url,
+        showCamera: false,
+      });
+    }
 
 
-render() {
-    return (
-        this.state.showCamera ?
-        <MyCamera /> :
+
+    render() {
+
+      console.log(this.props)
+      return this.state.showCamera ? (
+        <MyCamera onImageUpload={(url) => this.onImageUpload(url)} />
+      ) : (
       <View style={styles.formContainer}>
         <Text> Nuevo Post </Text>
         <TextInput

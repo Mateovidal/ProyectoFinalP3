@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Text, View, TextInput, StyleSheet, TouchableOpacity, FlatList } from 'react-native'
 import {db, auth} from "../firebase/config"
 import firebase from 'firebase';
+import Comment from '../components/Comment';
 
 class NewCommentForm extends Component {
 
