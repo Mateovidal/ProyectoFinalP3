@@ -7,7 +7,8 @@ class Profile extends Component {
   constructor(props) {
     super(props);
       this.state = { 
-        posts: []
+        posts: [],
+        resto: []
       }  
   }
 
@@ -33,6 +34,17 @@ class Profile extends Component {
       })
   }
 
+  deletePost(){
+    let postsAfterDelete = this.state.posts.filter(function(){
+        let id = this.state.posts.postData.data.id
+        return this.props.postData != id
+    })
+
+    this.setState({
+        resto : postsAfterDelete
+    })
+}
+
   
     render() {
       console.log(this.state.posts);
@@ -44,15 +56,22 @@ class Profile extends Component {
             <Text> Última sesión: {auth.currentUser.metadata.lastSignInTime} </Text>
             
             <Text>Mis Posteos</Text>
+            <Text>Cantidad de posteos: {this.state.posts.length}</Text>
         
             {/* flatlist para mostrar posteos */}
             <FlatList 
                     data={this.state.posts}
                     keyExtractor={(post) => post.id}
                     renderItem={({item}) => 
-                    <Post
+                    
+                    <View>
+                       <TouchableOpacity style={styles.button} onPress={() => this.deletePost()}>
+                          <Text> Borrar Post</Text>
+                      </TouchableOpacity>
+                      <Post
                         postData={item}
-                    />}
+                      />
+                    </View>}
                 />
               
         

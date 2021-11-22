@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Text, View } from 'react-native'
 
+
 class Comment extends Component {
     constructor(props){
         super(props)
@@ -12,8 +13,8 @@ class Comment extends Component {
         console.log(this.props.commentData.data);
         return (
             <View>
-                {/* <Text>{this.props.commentNumber}</Text> */}
-                <Text> hola</Text>
+                
+                <Text>coment # {this.props.number} </Text>
             </View>
         )
     }

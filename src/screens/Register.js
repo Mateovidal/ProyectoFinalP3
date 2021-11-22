@@ -13,7 +13,11 @@ import {auth} from '../firebase/config'
             username:""
         }
     }
-
+verify(){
+    console.log(this.state.email);
+    console.log(this.state.username);
+    console.log(this.state.password);
+}
 
     render() {
         return (
@@ -28,7 +32,7 @@ import {auth} from '../firebase/config'
                 />                   */}
                 <TextInput
                 style={styles.input}
-                onChangeText={(text)=>this.setState({email: text})}
+                onChangeText={(textEmail)=>this.setState({email: textEmail})}
                 placeholder = "email"
                 keyboardType="email-adress"
                 />
@@ -37,9 +41,9 @@ import {auth} from '../firebase/config'
                 <TextInput
                 style={styles.input}
                 
-                onChangeText={(text)=>
+                onChangeText={(textPassword)=>
                     
-                          this.setState({password: text})}
+                          this.setState({password: textPassword})}
                     
                     
                    
@@ -50,33 +54,29 @@ import {auth} from '../firebase/config'
                 
                 <TextInput
                 style={styles.input}
-                onChangeText={(text)=>this.setState({username: text})}
+                onChangeText={(textUsername)=>this.setState({username: textUsername})}
                 placeholder = "username"
                 keyboardType="email-adress"
                 />
 
-                <TouchableOpacity
-                style={styles.button}
-                onPress={()=> this.props.register(this.state.email, this.state.password, this.state.username)}
-                >
-                    {this.state.password.length < 6 ?
-                        Alert.alert(
-                            "Invalid Password",
-                            "Password must have 6+ characters",
-                            [
-                              {
-                                text: "Cancel",
-                                onPress: () => console.log("Cancel Pressed"),
-                                style: "cancel"
-                              },
-                              { text: "OK", onPress: () => console.log("OK Pressed") }
-                            ]
-                          ): null}
 
-                    <Text style={styles.textButton}
+   <TouchableOpacity
+   style={styles.button}
+   onPress={()=> this.props.register(this.state.email, this.state.password, this.state.username)}
+   >
+        <Text style={styles.textButton}
                     >Registrar</Text>
+                     </TouchableOpacity>
+  
 
-                </TouchableOpacity>
+                    
+
+                 
+                    <Text> Debe llenar todos los campos para poder registrarse!</Text>           
+
+      
+
+                
 
             </View>
 

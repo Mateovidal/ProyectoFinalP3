@@ -1,5 +1,5 @@
 import React, {Component} from 'react'; 
-import { Text, View, TextInput, TouchableOpacity, StyleSheet,Modal, ActivityIndicator, FlatList } from "react-native";
+import { Text, View, TextInput, TouchableOpacity, StyleSheet,Modal, ActivityIndicator, FlatList, Image } from "react-native";
 import { db, auth } from "../firebase/config";
 import firebase from 'firebase';
 import NewCommentForm from '../screens/NewCommentForm';
@@ -13,7 +13,8 @@ constructor(props){
         showModal: false,
         comentarios: 0,
         title: '',
-        description: ''
+        description: '',
+        resto: []
     }
 }
 
@@ -91,63 +92,7 @@ dislikePost(){
 }
 
 
-// receiveComments(){
-//     let comentarios = this.props.postData.data.comentarios
 
-//     if (comentarios) {
-//     this.setState({    
-//         comentarios: comentarios.length
-//     })  
-//     }
-// }
-
-// commentPost(){
-//     let post  = db.collection("posteos").doc(this.props.postData.id);
-
-//     post.update({
-//         comentarios: firebase.firestore.FieldValue.arrayUnion(auth.currentUser.email)
-//     })
-
-//     .then(() => {
-//         this.setState({
-//             comentarios: this.state.comentarios + 1,
-        
-//     })
-//         console.log("Document successfully updated!");
-//     })
-
-//     .catch((error) => {
-//         // The document probably doesn't exist.
-//         console.error("Error updating document: ", error);
-//     });
-        
-//         console.log('estoy comentando')
-
-// }
-
-// discommentPost(){
-//     let post  = db.collection("posteos").doc(this.props.postData.id);
-
-//     post.update({
-//         comentarios: firebase.firestore.FieldValue.arrayRemove(auth.currentUser.email)
-//     })
-
-//     .then(() => {
-//         this.setState({
-//             comentarios: this.state.comentarios - 1,
-          
-//         })
-//         console.log("Document successfully updated!");
-//     })
-
-//     .catch((error) => {
-//         // The document probably doesn't exist.
-//         console.error("Error updating document: ", error);
-//     });
-   
-//     console.log('estoy descomentando')
-    
-// }
 
 openModal() {
     this.setState({
@@ -166,10 +111,14 @@ render(){
     // console.log(this.props.postData);
     return(
         <View style={styles.container}>
+           
             <Text>{this.props.postData.data.user}</Text>
+            <Image style={styles.foto}
+            source={this.props.postData.data.photo}></Image>
             <Text>{this.props.postData.data.title}</Text>
             <Text>{this.props.postData.data.description}</Text>
             <Text>{this.state.likes}</Text>
+            
         
         {/* if */}
         {
@@ -209,7 +158,15 @@ render(){
 
 }}
 const styles = StyleSheet.create({
+    foto:{width: 300,
+        height: 300,
+        alignSelf: 'center',
+        borderRadius: 5
+    },
     container: {
+        width: 400,
+        height: 600,
+        alignSelf: 'center',
         marginVertical: 15,
         shadowColor: "#ccc",
         shadowOffset: {

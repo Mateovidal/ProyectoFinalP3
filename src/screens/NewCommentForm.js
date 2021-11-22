@@ -64,7 +64,8 @@ class NewCommentForm extends Component {
                 keyExtractor={(comment) => comment.createdAt}
                 renderItem={({item}) => 
                     <Comment
-                        commentData={item}
+                    number={this.props.postData.data.comentarios.length}
+                    commentData={item}
                     />}
         />
         <Text> Nuevo Comentario </Text>
