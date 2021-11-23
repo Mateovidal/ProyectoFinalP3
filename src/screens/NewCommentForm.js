@@ -61,7 +61,7 @@ class NewCommentForm extends Component {
         <Text> Comentarios: {this.props.postData.data.comentarios.length} </Text>
         <FlatList
                 data={this.props.postData.data.comentarios}
-                keyExtractor={(comment) => comment.createdAt}
+                keyExtractor={(comment) => comment.createdAt.toString()}
                 renderItem={({item}) => 
                     <Comment
                     number={this.props.postData.data.comentarios.length}

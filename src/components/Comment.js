@@ -13,8 +13,8 @@ class Comment extends Component {
         console.log(this.props.commentData.data);
         return (
             <View>
-                
-                <Text>coment # {this.props.number} </Text>
+                {/* <Text>coment # {this.props.number} </Text> */}
+                <Text> {this.props.commentData.comment} </Text>
             </View>
         )
     }

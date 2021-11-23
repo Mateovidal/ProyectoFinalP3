@@ -12,8 +12,6 @@ constructor(props){
         liked: false,
         showModal: false,
         comentarios: 0,
-        title: '',
-        description: '',
         resto: []
     }
 }
@@ -139,7 +137,7 @@ render(){
         <Modal
         style={styles.modal}
         animationType="slide"
-        transparent={true}
+        transparent={false}
         visible={this.state.showModal}>
             <TouchableOpacity style={styles.button2} onPress={() => this.closeModal()}>
                 <Text>X</Text>
