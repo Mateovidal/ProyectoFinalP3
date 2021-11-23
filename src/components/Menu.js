@@ -7,6 +7,7 @@ import {Alert} from "react-native"
 import Home from '../screens/Home';
 import Login from '../screens/Login';
 import Register from '../screens/Register';
+import Search from '../screens/Search';
 import Profile from '../screens/Profile'
 import NewPostForm from "../screens/NewPostForm";
 
@@ -20,7 +21,12 @@ class Menu extends Component {
         this.state= {
             loggedIn: false,
             userData: {},
-            error: '', 
+            error: '',
+            username:'',
+            emailSearch: '',
+            usuarios: [],
+            usuariosBuscados: [],
+            resultadosSearch:false
         };
     }
 
@@ -46,20 +52,22 @@ class Menu extends Component {
     // recibimos email y pass
 
     register(email, password, username) {
-     
+       
+    
+    
        auth
             .createUserWithEmailAndPassword(email, password)
+            .then(res => {
+                res.user.updateProfile({
+                    displayName:  username })
+            })
             .then((userData) => {
                 this.setState({
                     loggedIn: true, 
                     userData: userData.user, 
                 })
             })
-            .then(res => {
-                res.user.updateProfile({
-                    displayName: username
-                })
-            })
+            
             .catch((err) => {
                 this.setState({
                     error: err.message
@@ -70,7 +78,7 @@ class Menu extends Component {
         
         
        
-        console.log(this.state.userData.displayName);
+        
     }
 
     login(email, password) {
@@ -104,6 +112,25 @@ class Menu extends Component {
         })
     }
 
+    filtrarUsers(usuarioBuscado){
+        let usuarioSearch = this.state.albums.filter(user => user.email.toLowerCase().includes(usuarioBuscado.toLowerCase()));
+        if (albumsFiltrados.length !== 0) {
+            this.setState({
+                
+                usuariosBuscados: usuarioSearch,
+                
+                resultadosSearch: true,
+    
+              })  
+        }
+        else {
+            this.setState({
+                resultadosSearch:false  
+            })
+            
+        }
+    }
+
     render(){
         console.log(this.state.userData);
         return(
@@ -112,21 +139,25 @@ class Menu extends Component {
                 <Drawer.Navigator>
                     {(this.state.loggedIn === false) ? (
                         <>
+                        <Drawer.Screen name="Register" component={() => <Register 
+                                                                                error={this.state.error} 
+                                                                                register={(email, pass, username ) => this.register(email,pass, username)} />} 
+                            /> 
                             <Drawer.Screen name="Login" component={() => <Login  
                                                                             error={this.state.error}   
                                                                             login={(email, pass) => this.login(email,pass)}/>}
                             /> 
-                            <Drawer.Screen name="Register" component={() => <Register 
-                                                                                error={this.state.error} 
-                                                                                register={(email, pass) => this.register(email,pass)} />} 
-                            /> 
+                            
                         </>
                     ):(
                         <>
                             <Drawer.Screen name="Home" component={()=> <Home />}/>
                             <Drawer.Screen name="New Post" component={()=> <NewPostForm/>}/>
                             <Drawer.Screen name="Mi Perfil" component={() => <Profile logout={() => this.logout()} userdata={this.state.userData.displayName}/>} />
-
+                            <Drawer.Screen name="Search" component={() => <Search 
+                                                                                error={this.state.error} 
+                                                                                search={(emailSearch) => this.filtrarUsers(emailSearch)} />} 
+                            /> 
                         </>
                             
                     )

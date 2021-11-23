@@ -33,13 +33,7 @@ receiveLikes(){
         likes: likes.length
     })  
     }
-    //este usuario likeo?
-    // if (likes.includes(auth.currentUser.email)
-    // ) {
-    //     this.setState({
-    //     liked: true
-    // })
-    // }
+    
 
 }
 
@@ -112,7 +106,7 @@ render(){
     return(
         <View style={styles.container}>
            
-            <Text>{this.props.postData.data.user}</Text>
+            <Text>{this.props.userdata}</Text>
             <Image style={styles.foto}
             source={this.props.postData.data.photo}></Image>
             <Text>{this.props.postData.data.title}</Text>
@@ -143,6 +137,7 @@ render(){
         null 
         :
         <Modal
+        style={styles.modal}
         animationType="slide"
         transparent={true}
         visible={this.state.showModal}>
@@ -158,6 +153,9 @@ render(){
 
 }}
 const styles = StyleSheet.create({
+    modal:{height:300,
+    width:400}
+    ,
     foto:{width: 300,
         height: 300,
         alignSelf: 'center',
@@ -165,7 +163,7 @@ const styles = StyleSheet.create({
     },
     container: {
         width: 400,
-        height: 600,
+        height:800,
         alignSelf: 'center',
         marginVertical: 15,
         shadowColor: "#ccc",

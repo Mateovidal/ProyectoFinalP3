@@ -9,6 +9,7 @@ class MyCamera extends Component {
         this.state = {
             permission: false,
             photo: "",
+            hayFoto: false
         }
         this.camera
     };
@@ -33,6 +34,7 @@ class MyCamera extends Component {
             console.log(photo)
             this.setState({
                 photo: photo.uri,
+                hayFoto: true,
             })
         })
         .catch((e) => console.log(e))
@@ -59,10 +61,17 @@ class MyCamera extends Component {
           .catch((err) => console.log(err));
       }
 
+      dontSavePhoto(){
+        this.setState({
+          hayFoto: false
+        })
+
+      }
+
     render() {
         return (
           <>
-            {this.state.photo ? (
+            {this.state.photo != null && this.state.hayFoto != false? (
               <>
                 <Image
                   style={{ flex: 1, width: "100%" }}
@@ -72,7 +81,7 @@ class MyCamera extends Component {
                   <TouchableOpacity onPress={() => this.savePhoto()}>
                     <Text>Aceptar</Text>
                   </TouchableOpacity>
-                  <TouchableOpacity>
+                  <TouchableOpacity onPress={() =>this.dontSavePhoto()}>
                     <Text>Cancelar</Text>
                   </TouchableOpacity>
                 </View>

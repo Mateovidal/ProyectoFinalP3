@@ -3,7 +3,7 @@ import { Text, View, TextInput, TouchableOpacity, StyleSheet, FlatList, } from "
 import { auth, db } from "../firebase/config";
 import Post from '../components/Post'
 
-class Profile extends Component {
+class NotMyProfile extends Component {
   constructor(props) {
     super(props);
       this.state = { 
@@ -34,29 +34,20 @@ class Profile extends Component {
       })
   }
 
-  deletePost(){
-    let postsAfterDelete = this.state.posts.filter(function(){
-        let id = this.state.posts.postData.data.id
-        return this.props.postData != id
-    })
-
-    this.setState({
-        resto : postsAfterDelete
-    })
-}
+ 
 
   
     render() {
       console.log(this.state.posts);
         return (
           <View>
-            <Text style={styles.infoProfile}> Email usuario: {auth.currentUser.email} </Text>
-            <Text style={styles.infoProfile}> Username: {this.props.userdata} </Text>
-            <Text style={styles.infoProfile}> Fecha de creación: {auth.currentUser.metadata.creationTime} </Text>
-            <Text style={styles.infoProfile}> Última sesión: {auth.currentUser.metadata.lastSignInTime} </Text>
+            <Text> Email usuario: {auth.currentUser.email} </Text>
+            <Text> Username: {this.props.userdata} </Text>
+            <Text> Fecha de creación: {auth.currentUser.metadata.creationTime} </Text>
+            <Text> Última sesión: {auth.currentUser.metadata.lastSignInTime} </Text>
             
-            <Text style={styles.infoProfile}>Mis Posteos</Text>
-            <Text style={styles.infoProfile}>Cantidad de posteos: {this.state.posts.length}</Text>
+            <Text>Los Posteos de: </Text>
+            <Text>Cantidad de posteos: {this.state.posts.length}</Text>
         
             {/* flatlist para mostrar posteos */}
             <FlatList 
@@ -65,11 +56,10 @@ class Profile extends Component {
                     renderItem={({item}) => 
                     
                     <View>
-                       <TouchableOpacity style={styles.borrarButton} onPress={() => this.deletePost()}>
-                          <Text > Borrar Post</Text>
+                       <TouchableOpacity style={styles.button} onPress={() => this.deletePost()}>
+                          <Text> Borrar Post</Text>
                       </TouchableOpacity>
                       <Post
-                      userdata={this.props.userdata}
                         postData={item}
                       />
                     </View>}
@@ -89,22 +79,6 @@ class Profile extends Component {
     }
 
     const styles = StyleSheet.create({
-      infoProfile:{
-        alignSelf: 'center',
-        textDecorationColor: 'blue'
-      },
-      borrarButton:{
-        alignSelf: 'center',
-        backgroundColor: "red",
-        paddingHorizontal: 10,
-        paddingVertical: 6,
-        textAlign: "center",
-        borderRadius: 4,
-        borderWidth: 1,
-        borderStyle: "solid",
-        borderColor: "black",
-        width:400,
-      },
         button: {
           backgroundColor: "red",
           paddingHorizontal: 10,
@@ -120,4 +94,4 @@ class Profile extends Component {
         },
       });
     
-export default Profile;
+export default NotMyProfile;

@@ -2,22 +2,26 @@ import React, { Component } from 'react'
 import { Text, View, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native'
 import {auth} from '../firebase/config'
 
- class Register extends Component {
+ class Search extends Component {
     constructor(props){
         super(props);
 
         this.state={
             // name: '',
-            email: '',
-            password: '',
-            username:''
+            searchEmail: '',
+            
         }
     }
-verify(){
-    console.log(this.state.email);
-    console.log(this.state.username);
-    console.log(this.state.password);
-}
+
+    searchMethod(emailSearch){
+
+        this.setState(
+                 {emailSearch: emailSearch.target.value},
+                 ()=>this.props.filtrarUsuarios(this.state.searchEmail)
+             ) 
+     
+             
+         }
 
     render() {
         return (
@@ -25,41 +29,20 @@ verify(){
             //le pasamos un text, ese texto se lo cmabiamos al estado del email con el set state, el cual tiene un email, y le pasamos el text
             <View>
 
-                {/* <TextInput
-                onChangeText={(text)=>this.setState({name: text})}
-                placeholder = "name"
-                keyboardType="name"
-                />                   */}
                 <TextInput
                 style={styles.input}
-                onChangeText={(textEmail)=>this.setState({email: textEmail})}
-                placeholder = "email"
+                onChangeText={(textSearchEmail)=>this.setState({searchEmail: textSearchEmail})}
+                placeholder = "Search by email"
                 keyboardType="email-adress"
                 />
                 
-        
-                <TextInput
-                style={styles.input}
-                onChangeText={(textPassword)=> this.setState({password: textPassword})}
-                placeholder = "password"
-                keyboardType="default"
-                secureTextEntry={true}
-                />
-                
-                <TextInput
-                style={styles.input}
-                onChangeText={(textUsername)=>this.setState({username: textUsername})}
-                placeholder = "username"
-                keyboardType="email-adress"
-                />
-
-
+    
    <TouchableOpacity
    style={styles.button}
-   onPress={()=> this.props.register(this.state.email, this.state.password, this.state.username)}
+   onPress={()=> this.search(this.state.searchEmail)}
    >
         <Text style={styles.textButton}
-                    >Registrar</Text>
+                    >Search</Text>
                      </TouchableOpacity>
   
 
@@ -102,7 +85,7 @@ const styles = StyleSheet.create({
         fontSize: 12
     },
     button:{
-        backgroundColor:'#28a745',
+        backgroundColor:'#00ff00',
         paddingHorizontal: 10,
         paddingVertical: 6,
         textAlign: 'center',
@@ -119,4 +102,4 @@ const styles = StyleSheet.create({
 })
 
 
-export default Register;
+export default Search;
