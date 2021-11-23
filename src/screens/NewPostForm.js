@@ -13,6 +13,7 @@ class NewPostForm extends Component {
             description: '',
             url: "",
             showCamera: true,
+            username: ''
             
         };
     }
@@ -27,6 +28,7 @@ class NewPostForm extends Component {
             likes: [], 
             comentarios: [],
             photo: this.state.url,
+            username: auth.currentUser.displayName
         })
         .then(() => {
             this.setState({

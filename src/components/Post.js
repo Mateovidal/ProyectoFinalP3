@@ -16,7 +16,6 @@ constructor(props){
     }
 }
 
-
 componentDidMount() {
     this.receiveLikes();
     // this.receiveComments();
@@ -83,9 +82,6 @@ dislikePost(){
     
 }
 
-
-
-
 openModal() {
     this.setState({
         showModal: true
@@ -104,7 +100,7 @@ render(){
     return(
         <View style={styles.container}>
            
-            <Text>{this.props.userdata}</Text>
+            <Text>{this.props.postData.data.username}</Text>
             <Image style={styles.foto}
             source={this.props.postData.data.photo}></Image>
             <Text>{this.props.postData.data.title}</Text>
