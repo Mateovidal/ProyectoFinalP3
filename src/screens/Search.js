@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
-import { Text, View, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native'
-import {auth} from '../firebase/config'
+import { Text, View, TextInput, TouchableOpacity, StyleSheet, Alert, FlatList } from 'react-native'
+import {db, auth} from '../firebase/config'
+import firebase from 'firebase';
+import Post from '../components/Post'
+
 
  class Search extends Component {
     constructor(props){
@@ -9,19 +12,30 @@ import {auth} from '../firebase/config'
         this.state={
             // name: '',
             searchEmail: '',
+            posts: []
             
         }
     }
 
-    searchMethod(emailSearch){
+    filtrarUsers(){
 
-        this.setState(
-                 {emailSearch: emailSearch.target.value},
-                 ()=>this.props.filtrarUsuarios(this.state.searchEmail)
-             ) 
-     
-             
-         }
+        db.collection('posteos').where('user','==', this.state.searchEmail)
+        .orderBy('createdAt', 'desc')
+        .onSnapshot((docs) => {
+            let posteos = []
+            docs.forEach((doc) => {
+                posteos.push({
+                    id: doc.id,
+                    data: doc.data()
+                })
+            })
+            this.setState({
+                posts: posteos
+            })
+        })
+        
+    }
+
 
     render() {
         return (
@@ -37,23 +51,25 @@ import {auth} from '../firebase/config'
                 />
                 
     
-   <TouchableOpacity
-   style={styles.button}
-   onPress={()=> this.search(this.state.searchEmail)}
-   >
-        <Text style={styles.textButton}
-                    >Search</Text>
-                     </TouchableOpacity>
-  
+        <TouchableOpacity
+            style={styles.button}
+            onPress={()=> this.filtrarUsers(this.state.searchEmail)}
+        >
+            <Text style={styles.textButton}> Search</Text>
+        </TouchableOpacity>
 
-                    
+        {this.state.posts.length != 0 ? 
+        <FlatList 
+        data={this.state.posts}
+        keyExtractor={(post) => post.id}
+        renderItem={({item}) => 
+            <Post
+                postData={item}
+            />}
+        />
+        :
+        <Text>No hay resultados</Text>} 
 
-                 
-                          
-
-      
-
-                
 
             </View>
 

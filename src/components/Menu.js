@@ -112,24 +112,7 @@ class Menu extends Component {
         })
     }
 
-    filtrarUsers(usuarioBuscado){
-        let usuarioSearch = this.state.albums.filter(user => user.email.toLowerCase().includes(usuarioBuscado.toLowerCase()));
-        if (albumsFiltrados.length !== 0) {
-            this.setState({
-                
-                usuariosBuscados: usuarioSearch,
-                
-                resultadosSearch: true,
-    
-              })  
-        }
-        else {
-            this.setState({
-                resultadosSearch:false  
-            })
-            
-        }
-    }
+
 
     render(){
         console.log(this.state.userData);
@@ -154,9 +137,7 @@ class Menu extends Component {
                             <Drawer.Screen name="Home" component={()=> <Home />}/>
                             <Drawer.Screen name="New Post" component={()=> <NewPostForm/>}/>
                             <Drawer.Screen name="Mi Perfil" component={() => <Profile logout={() => this.logout()} userdata={this.state.userData.displayName}/>} />
-                            <Drawer.Screen name="Search" component={() => <Search 
-                                                                                error={this.state.error} 
-                                                                                search={(emailSearch) => this.filtrarUsers(emailSearch)} />} 
+                            <Drawer.Screen name="Search" component={() => <Search />} 
                             /> 
                         </>
                             
