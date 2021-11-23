@@ -151,7 +151,7 @@ class Menu extends Component {
                         </>
                     ):(
                         <>
-                            <Drawer.Screen name="Home" component={()=> <Home />}/>
+                            <Drawer.Screen name="Home" component={()=> <Home userdata={this.state.userData.displayName}/> }/>
                             <Drawer.Screen name="New Post" component={()=> <NewPostForm/>}/>
                             <Drawer.Screen name="Mi Perfil" component={() => <Profile logout={() => this.logout()} userdata={this.state.userData.displayName}/>} />
                             <Drawer.Screen name="Search" component={() => <Search 
