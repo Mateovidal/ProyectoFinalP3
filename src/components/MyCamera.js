@@ -62,6 +62,7 @@ class MyCamera extends Component {
                 this.props.onImageUpload(url);
                 this.setState({
                   photo: "",
+                 
                 });
               });
             });
@@ -79,7 +80,7 @@ class MyCamera extends Component {
     render() {
         return (
           <>
-            {this.state.photo != null && this.state.hayFoto != false? (
+            {this.state.photo != null && this.state.hayFoto && this.props.hayFotoProp != false? (
               <>
                 <Image
                   style={{ flex: 1, width: "100%" }}

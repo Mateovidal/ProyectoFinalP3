@@ -24,8 +24,6 @@ class Menu extends Component {
             error: '',
             username:'',
             emailSearch: '',
-            usuarios: [],
-            usuariosBuscados: [],
             resultadosSearch:false
         };
     }
@@ -112,7 +110,7 @@ class Menu extends Component {
         })
     }
 
-
+  
 
     render(){
         console.log(this.state.userData);
@@ -135,8 +133,10 @@ class Menu extends Component {
                     ):(
                         <>
                             <Drawer.Screen name="Home" component={()=> <Home userdata={this.state.userData.displayName}/> }/>
-                            <Drawer.Screen name="New Post" component={()=> <NewPostForm/>}/>
-                            <Drawer.Screen name="Mi Perfil" component={() => <Profile logout={() => this.logout()} userdata={this.state.userData.displayName}/>} />
+                            <Drawer.Screen name="New Post" component={()=> <NewPostForm numberPost={()=> this.numberPost()}/>}/>
+                            <Drawer.Screen name="Mi Perfil" component={() => <Profile logout={() => this.logout()} 
+                            
+                            userdata={this.state.userData.displayName}/>} />
                             <Drawer.Screen name="Search" component={() => <Search />} 
                             /> 
                         </>

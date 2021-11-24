@@ -13,7 +13,9 @@ class NewPostForm extends Component {
             description: '',
             url: "",
             showCamera: true,
-            username: ''
+            username: '',
+            hayFotoProp: true,
+          
             
         };
     }
@@ -34,6 +36,10 @@ class NewPostForm extends Component {
             this.setState({
                 titulo:  "",
                 descripcion: "", 
+                showCamera: true,
+                title:"",
+                description:"",
+               
             })
         })
         .catch((err) => {
@@ -54,7 +60,7 @@ class NewPostForm extends Component {
 
       console.log(this.props)
       return this.state.showCamera ? (
-        <MyCamera onImageUpload={(url) => this.onImageUpload(url)} />
+        <MyCamera hayFotoProp={this.state.hayFotoProp} onImageUpload={(url) => this.onImageUpload(url)} />
       ) : (
       <View style={styles.formContainer}>
         <Text> Nuevo Post </Text>
@@ -76,6 +82,7 @@ class NewPostForm extends Component {
         <TouchableOpacity
           style={styles.button}
           onPress={() => this.submitPost()}
+         
         >
           <Text style={styles.textButton}> Postear </Text>
         </TouchableOpacity>

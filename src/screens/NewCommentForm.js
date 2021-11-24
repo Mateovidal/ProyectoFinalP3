@@ -34,6 +34,7 @@ class NewCommentForm extends Component {
     .then(() => {
         this.setState({
             comments: this.state.comments + 1,
+            comment: ""
           
         })
         console.log("Document successfully updated!");
@@ -59,15 +60,20 @@ class NewCommentForm extends Component {
       <View style={styles.formContainer}>
         
         <Text> Comentarios: {this.props.postData.data.comentarios.length} </Text>
+        {this.props.postData.data.comentarios.length == 0 ?
+        <Text>¡Aún no hay comentarios! Se el primero en opinar</Text>
+        :
         <FlatList
-                data={this.props.postData.data.comentarios}
-                keyExtractor={(comment) => comment.createdAt.toString()}
-                renderItem={({item}) => 
-                    <Comment
-                    number={this.props.postData.data.comentarios.length}
-                    commentData={item}
-                    />}
-        />
+        data={this.props.postData.data.comentarios}
+        keyExtractor={(comment) => comment.createdAt.toString()}
+        renderItem={({item}) => 
+            <Comment
+            number={this.props.postData.data.comentarios.length}
+            commentData={item}
+            />}
+/>
+    
+    }
         <Text> Nuevo Comentario </Text>
         <TextInput
           onChangeText={(text) => this.setState({ comment: text})}
