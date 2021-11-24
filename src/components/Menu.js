@@ -50,9 +50,6 @@ class Menu extends Component {
     // recibimos email y pass
 
     register(email, password, username) {
-       
-    
-    
        auth
             .createUserWithEmailAndPassword(email, password)
             .then(res => {
@@ -71,12 +68,6 @@ class Menu extends Component {
                     error: err.message
                 })
             })
-
-        
-        
-        
-       
-        
     }
 
     login(email, password) {
@@ -90,7 +81,8 @@ class Menu extends Component {
         })
         .catch((err) => {
             this.setState({
-                error: err.message
+                error: err.message,
+                error2: true
             })
         })
     }
@@ -125,7 +117,8 @@ class Menu extends Component {
                                                                                 register={(email, pass, username ) => this.register(email,pass, username)} />} 
                             /> 
                             <Drawer.Screen name="Login" component={() => <Login  
-                                                                            error={this.state.error}   
+                                                                            error={this.state.error}
+                                                                            error2={this.state.error2}  
                                                                             login={(email, pass) => this.login(email,pass)}/>}
                             /> 
                             

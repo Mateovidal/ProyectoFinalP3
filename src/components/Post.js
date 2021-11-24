@@ -8,11 +8,10 @@ class Post extends Component{
 constructor(props){
     super(props)
     this.state = {
-        likes: 0,
+        likes: this.props.postData.data.likes,
         liked: false,
         showModal: false,
         comentarios: 0,
-        resto: []
     }
 }
 
@@ -20,15 +19,16 @@ componentDidMount() {
     this.receiveLikes();
     // this.receiveComments();
     console.log(this.props.postData)
+    this.filtrarLikes()
 };
 
 
 receiveLikes(){
-    let likes = this.props.postData.data.likes
+    // let likes = this.props.postData.data.likes
     //cuantos likes?
-    if (likes) {
+    if (this.state.likes) {
     this.setState({    
-        likes: likes.length
+        likes: this.state.likes.length
     })  
     }
     
@@ -43,8 +43,9 @@ likePost(){
     })
 
     .then(() => {
+        // console.log(this.state.likes);
         this.setState({
-            likes: this.state.likes + 1,
+            likes: this.state.likes,
             liked: true
     })
         console.log("Document successfully updated!");
@@ -68,7 +69,7 @@ dislikePost(){
 
     .then(() => {
         this.setState({
-            likes: this.state.likes - 1,
+            likes: this.state.likes,
             liked: false
         })
         console.log("Document successfully updated!");
@@ -82,6 +83,16 @@ dislikePost(){
     console.log('estoy deslikeando')
     
 }
+    // filtrarLikes(){
+
+    //     db.collection('posteos').doc(this.props.postData.id).where('likes','==', auth.currentUser.email)
+    //     .onSnapshot((docs) => {
+    //         this.setState({
+    //             liked: true
+    //         })
+    //     })
+    //     console.log(this.state.liked);
+    // }
 
 openModal() {
     this.setState({
@@ -96,11 +107,11 @@ closeModal() {
 }
 
 deletePost(){
-   console.log(this.props.postData);
+//    console.log(this.props.postData);
    db.collection("posteos").doc(this.props.postData.id).delete();
 }
 render(){
-    // console.log(this.props.postData);
+    console.log(this.state.likes);
     return(
         <View style={styles.container}>
            
@@ -122,7 +133,9 @@ render(){
       
         {
             !this.state.liked ?
-        <TouchableOpacity style={styles.button} onPress={() => this.likePost()}>
+        <TouchableOpacity style={styles.button} onPress={() => this.likePost()}
+                                                // onPress={() => this.filtrarLikes()}
+                                                >
             <Text>Like</Text>
         </TouchableOpacity>
         

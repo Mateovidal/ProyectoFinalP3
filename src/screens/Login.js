@@ -9,15 +9,19 @@ import { Text, View, TextInput, TouchableOpacity, StyleSheet, } from "react-nati
 
             email: '', 
             password: '' ,
-            loggedIn: false,
+            loggedIn: false,            
             
         }
     }
 
+
     render() {
         return (
             <View>
+            {this.state.error == true 
+            ?
             <Text> {this.props.error} </Text>
+            : <></>}
             <TextInput
               style={styles.input}
               onChangeText={(text) => this.setState({ email: text })}
@@ -31,12 +35,16 @@ import { Text, View, TextInput, TouchableOpacity, StyleSheet, } from "react-nati
               keyboardType="email-address"
               secureTextEntry={true}
             />
+
+            { this.state.email.includes('@', '.com') && this.state.password.length >= 6
+            ? 
             <TouchableOpacity
-              style={styles.button}
-              onPress={() => this.props.login(this.state.email, this.state.password)}
+                style={styles.button}
+                onPress={()=> this.props.login(this.state.email, this.state.password)}
             >
-              <Text style={styles.textButton}>Login</Text>
+            <Text style={styles.textButton}>Login</Text>
             </TouchableOpacity>
+            : <></> }
           </View>
         )
     }

@@ -53,14 +53,18 @@ verify(){
                 keyboardType="email-adress"
                 />
 
+            { this.state.email.includes('@', '.com') &&  this.state.username.length >= 1 && this.state.password.length >= 6
+            ? 
+            <TouchableOpacity
+                style={styles.button}
+                onPress={()=> this.props.register(this.state.email, this.state.password, this.state.username)}
+            >
+            <Text style={styles.textButton}>Registrarme</Text>
+            </TouchableOpacity>
+            : <></> }
 
-   <TouchableOpacity
-   style={styles.button}
-   onPress={()=> this.props.register(this.state.email, this.state.password, this.state.username)}
-   >
-        <Text style={styles.textButton}
-                    >Registrar</Text>
-                     </TouchableOpacity>
+
+
   
 
                     
