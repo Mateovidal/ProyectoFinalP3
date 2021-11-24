@@ -54,7 +54,7 @@ class Home extends Component {
 
 const styles = StyleSheet.create({
     container: {
-       
+        backgroundColor: "#f5f5f5",
         textAlign: 'center',
         padding: 10,
     },

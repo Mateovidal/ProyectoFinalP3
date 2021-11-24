@@ -24,12 +24,16 @@ componentDidMount() {
 
 
 receiveLikes(){
-    // let likes = this.props.postData.data.likes
-    //cuantos likes?
-    if (this.state.likes) {
-    this.setState({    
-        likes: this.state.likes.length
-    })  
+    let likes = this.props.postData.data.likes;
+    if (likes) {
+        this.setState({
+            likes: likes.length
+        })
+    }
+    if (likes.includes(auth.currentUser.email)) {
+        this.setState({
+            liked: true
+        })
     }
     
 
@@ -45,7 +49,7 @@ likePost(){
     .then(() => {
         // console.log(this.state.likes);
         this.setState({
-            likes: this.state.likes,
+            likes: this.state.likes + 1,
             liked: true
     })
         console.log("Document successfully updated!");
@@ -60,6 +64,9 @@ likePost(){
 
 }
 
+
+
+
 dislikePost(){
     let post  = db.collection("posteos").doc(this.props.postData.id);
 
@@ -69,7 +76,7 @@ dislikePost(){
 
     .then(() => {
         this.setState({
-            likes: this.state.likes,
+            likes: this.state.likes - 1,
             liked: false
         })
         console.log("Document successfully updated!");
@@ -83,16 +90,7 @@ dislikePost(){
     console.log('estoy deslikeando')
     
 }
-    // filtrarLikes(){
 
-    //     db.collection('posteos').doc(this.props.postData.id).where('likes','==', auth.currentUser.email)
-    //     .onSnapshot((docs) => {
-    //         this.setState({
-    //             liked: true
-    //         })
-    //     })
-    //     console.log(this.state.liked);
-    // }
 
 openModal() {
     this.setState({
