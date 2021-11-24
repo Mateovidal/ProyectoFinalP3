@@ -51,6 +51,7 @@ class Profile extends Component {
         
             {/* flatlist para mostrar posteos */}
             <FlatList 
+                    style = {styles.infoProfile}
                     data={this.state.posts}
                     keyExtractor={(post) => post.id}
                     renderItem={({item}) => 
@@ -81,7 +82,8 @@ class Profile extends Component {
     const styles = StyleSheet.create({
       infoProfile:{
         alignSelf: 'center',
-        textDecorationColor: 'blue'
+        textDecorationColor: 'blue',
+        textAlign: "center",
       },
       
         button: {

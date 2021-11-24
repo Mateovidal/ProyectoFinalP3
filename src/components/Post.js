@@ -122,7 +122,7 @@ render(){
             
             <Image style={styles.foto}
             source={this.props.postData.data.photo}></Image>
-            <Text>{this.props.postData.data.title}</Text>
+            <Text style={styles.tituloDesign}> {this.props.postData.data.title}</Text>
             <Text>{this.props.postData.data.description}</Text>
             <Text>{this.state.likes}</Text>
             
@@ -181,12 +181,29 @@ const styles = StyleSheet.create({
         
         color:"#15d47e",
         textAlign: "center",
+
+        
         
 
     },
     usernameNotMe:{
         color:"#d6a913",
         textAlign: "center",
+        marginTop: 10,
+        marginBottom: 10,
+        color:"white",
+        
+        backgroundColor: "#8a0e86",
+        paddingHorizontal: 10,
+        paddingVertical: 6,
+        textAlign: "center",
+        borderRadius: 20,
+        borderWidth: 1,
+        borderStyle: "solid",
+        borderColor: "black",
+        width: 100,
+        alignSelf: "center"
+        
        
 
     },
@@ -282,6 +299,11 @@ const styles = StyleSheet.create({
     textButton: {
         color: "white",
     },
+
+    tituloDesign: {
+        fontWeight: 'bold',
+    },
+    
     modalContainer: {
         width:'100%',  
         flex: 3,
