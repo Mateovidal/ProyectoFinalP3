@@ -52,7 +52,7 @@ import Post from '../components/Post'
                 
     
         <TouchableOpacity
-            style={styles.button}
+            style={styles.buttonSearch}
             onPress={()=> this.filtrarUsers(this.state.searchEmail)}
         >
             <Text style={styles.textButton}> Search</Text>
@@ -100,16 +100,21 @@ const styles = StyleSheet.create({
         color: "#dc3545",
         fontSize: 12
     },
-    button:{
-        backgroundColor:'#00ff00',
+    buttonSearch:{
+        marginTop: 2,
+        marginBottom: 2,
+        color:"white",
+        backgroundColor: "#0ed907",
         paddingHorizontal: 10,
         paddingVertical: 6,
-        textAlign: 'center',
-        borderRadius:4, 
-        borderWidth:1,
-        borderStyle: 'solid',
-        borderColor: '#28a745',
-        marginTop: 5,
+        textAlign: "center",
+        borderRadius: 20,
+        borderWidth: 1,
+        borderStyle: "solid",
+        borderColor: "black",
+        width: 100,
+        alignSelf: "center"
+        
     },
     textButton:{
         color: '#fff'

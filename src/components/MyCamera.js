@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View, TouchableOpacity, Image } from 'react-native'
+import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native'
 import { Camera } from 'expo-camera'
 import { storage } from "../firebase/config";
 
@@ -87,10 +87,10 @@ class MyCamera extends Component {
                   source={{ uri: this.state.photo }}
                 />
                 <View>
-                  <TouchableOpacity onPress={() => this.savePhoto()}>
+                  <TouchableOpacity style={styles.buttonCamera1} onPress={() => this.savePhoto()}>
                     <Text>Aceptar</Text>
                   </TouchableOpacity>
-                  <TouchableOpacity onPress={() =>this.dontSavePhoto()}>
+                  <TouchableOpacity style={styles.buttonCamera2} onPress={() =>this.dontSavePhoto()}>
                     <Text>Cancelar</Text>
                   </TouchableOpacity>
                 </View>
@@ -106,7 +106,7 @@ class MyCamera extends Component {
                   // ref es una prop
                   ref={(cam) => (this.camera = cam)}
                 />
-                <TouchableOpacity onPress={() => this.takePicture()}>
+                <TouchableOpacity style={styles.buttonCamera} onPress={() => this.takePicture()}>
                   <Text>Shoot</Text>
                 </TouchableOpacity>
               </>
@@ -115,5 +115,57 @@ class MyCamera extends Component {
         );
       }
     }
+    const styles = StyleSheet.create({
+      buttonCamera:{
+        marginTop: 2,
+        marginBottom: 2,
+        color:"white",
+        
+        backgroundColor: "#1f5eff",
+        paddingHorizontal: 10,
+        paddingVertical: 6,
+        textAlign: "center",
+        borderRadius: 20,
+        borderWidth: 1,
+        borderStyle: "solid",
+        borderColor: "black",
+        width: 100,
+        alignSelf: "center"
+        
+      },
+buttonCamera1:{
+  marginTop: 2,
+  marginBottom: 2,
+  color:"white",
+  
+  backgroundColor: "#0ed907",
+  paddingHorizontal: 10,
+  paddingVertical: 6,
+  textAlign: "center",
+  borderRadius: 20,
+  borderWidth: 1,
+  borderStyle: "solid",
+  borderColor: "black",
+  width: 100,
+  alignSelf: "center"
+  
+},
+buttonCamera2:{
+  marginTop: 2,
+  marginBottom: 2,
+  color: "#ccc",
+  backgroundColor: "#d41743",
+  paddingHorizontal: 10,
+  paddingVertical: 6,
+  textAlign: "center",
+  borderRadius:20,
+  borderWidth: 1,
+  borderStyle: "solid",
+  borderColor: "black",
+  width: 100,
+  alignSelf: "center"
+  
+}
+    });
     
     export default MyCamera;

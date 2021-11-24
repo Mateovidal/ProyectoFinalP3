@@ -54,6 +54,7 @@ class Home extends Component {
 
 const styles = StyleSheet.create({
     container: {
+       
         textAlign: 'center',
         padding: 10,
     },

@@ -19,7 +19,7 @@ componentDidMount() {
     this.receiveLikes();
     // this.receiveComments();
     console.log(this.props.postData)
-    this.filtrarLikes()
+    // this.filtrarLikes()
 };
 
 
@@ -115,7 +115,13 @@ render(){
     return(
         <View style={styles.container}>
            
-            <Text>{this.props.postData.data.username}</Text>
+           {this.props.postData.data.user == auth.currentUser.email
+            ? 
+           <Text style={styles.usernameMe}>{this.props.postData.data.username}</Text>
+        :
+        <Text style={styles.usernameNotMe}>{this.props.postData.data.username}</Text>
+        }
+            
             <Image style={styles.foto}
             source={this.props.postData.data.photo}></Image>
             <Text>{this.props.postData.data.title}</Text>
@@ -124,7 +130,7 @@ render(){
             
         
         { this.props.postData.data.user == auth.currentUser.email ?   <TouchableOpacity style={styles.borrarButton} onPress={() => this.deletePost()}>
-                          <Text > Borrar Post</Text>
+                          <Text style={styles.textButton}> Borrar Post</Text>
                       </TouchableOpacity>
 
                       :
@@ -133,21 +139,21 @@ render(){
       
         {
             !this.state.liked ?
-        <TouchableOpacity style={styles.button} onPress={() => this.likePost()}
+        <TouchableOpacity style={styles.buttonLike} onPress={() => this.likePost()}
                                                 // onPress={() => this.filtrarLikes()}
                                                 >
-            <Text>Like</Text>
+            <Text style={styles.textButton}>Like</Text>
         </TouchableOpacity>
         
         :
 
-        <TouchableOpacity style={styles.button} onPress={() => this.dislikePost()}>
-            <Text>Dislike</Text>
+        <TouchableOpacity style={styles.buttonDislike} onPress={() => this.dislikePost()}>
+            <Text style={styles.textButton}>Dislike</Text>
         </TouchableOpacity>
         }
 
-        <TouchableOpacity style={styles.button2} onPress={() => this.openModal()}>
-            <Text>Add Comment</Text>
+        <TouchableOpacity style={styles.buttonComment} onPress={() => this.openModal()}>
+            <Text style={styles.textButton}>Comments</Text>
         </TouchableOpacity>
 
         {
@@ -173,29 +179,34 @@ render(){
 
 }}
 const styles = StyleSheet.create({
+    usernameMe:{
+        
+        color:"#15d47e",
+        textAlign: "center",
+        
+
+    },
+    usernameNotMe:{
+        color:"#d6a913",
+        textAlign: "center",
+       
+
+    },
     modal:{height:300,
     width:400}
     ,
-    borrarButton:{
-        alignSelf: 'center',
-        backgroundColor: "red",
-        paddingHorizontal: 10,
-        paddingVertical: 6,
-        textAlign: "center",
-        borderRadius: 4,
-        borderWidth: 1,
-        borderStyle: "solid",
-        borderColor: "black",
-        width:400,
-      },
+    
     foto:{width: 300,
         height: 300,
         alignSelf: 'center',
         borderRadius: 5
     },
     container: {
-        width: 400,
-        height:800,
+        borderColor: "black",
+        borderWidth: 2,
+        backgroundColor:"#fffbeb",
+        width: 330,
+        height:500,
         alignSelf: 'center',
         marginVertical: 15,
         shadowColor: "#ccc",
@@ -207,28 +218,71 @@ const styles = StyleSheet.create({
         shadowRadius: 10,
         borderRadius: 5,
     },
-    button: {
-        backgroundColor: "#28a745",
+    buttonLike: {
+        marginTop: 2,
+        marginBottom: 2,
+        color:"white",
+        
+        backgroundColor: "#0ed907",
         paddingHorizontal: 10,
         paddingVertical: 6,
         textAlign: "center",
-        borderRadius: 4,
+        borderRadius: 20,
         borderWidth: 1,
         borderStyle: "solid",
-        borderColor: "#28a745",
+        borderColor: "black",
+        width: 100,
+        alignSelf: "center"
+        
     },
-    button2: {
-        backgroundColor: "#0000ff",
+    buttonDislike: {
+        marginTop: 2,
+        marginBottom: 2,
+        color: "#ccc",
+        backgroundColor: "#d41743",
         paddingHorizontal: 10,
         paddingVertical: 6,
         textAlign: "center",
-        borderRadius: 4,
+        borderRadius:20,
         borderWidth: 1,
         borderStyle: "solid",
-        borderColor: "#28a745",
+        borderColor: "black",
+        width: 100,
+        alignSelf: "center"
+        
     },
+    buttonComment: {
+        marginTop: 2,
+        marginBottom: 2,
+        backgroundColor: "#24b2ff",
+        paddingHorizontal: 10,
+        paddingVertical: 6,
+        textAlign: "center",
+        borderRadius: 20,
+        borderWidth: 1,
+        borderStyle: "solid",
+        borderColor: "black",
+        width: 100,
+        alignSelf: "center"
+    },
+    borrarButton:{
+        marginTop: 2,
+        marginBottom: 2,
+        alignSelf: 'center',
+        backgroundColor: "red",
+        paddingHorizontal: 10,
+        paddingVertical: 6,
+        textAlign: "center",
+        borderRadius: 20,
+        borderWidth: 1,
+        borderStyle: "solid",
+        borderColor: "black",
+        
+        width: 100,
+        alignSelf: "center"
+      },
     textButton: {
-        color: "#fff",
+        color: "white",
     },
     modalContainer: {
         width:'100%',  
@@ -246,6 +300,8 @@ const styles = StyleSheet.create({
         backgroundColor: '#dc3545',
         marginTop:2,
         borderRadius: 4,
+        width: 100,
+        alignSelf: "center"
     },
     modalText:{
         fontWeight: 'bold',
