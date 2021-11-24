@@ -19,6 +19,7 @@ constructor(props){
 componentDidMount() {
     this.receiveLikes();
     // this.receiveComments();
+    console.log(this.props.postData)
 };
 
 
@@ -94,7 +95,10 @@ closeModal() {
     })
 }
 
-
+deletePost(){
+   console.log(this.props.postData);
+   db.collection("posteos").doc(this.props.postData.id).delete();
+}
 render(){
     // console.log(this.props.postData);
     return(
@@ -108,7 +112,14 @@ render(){
             <Text>{this.state.likes}</Text>
             
         
-        {/* if */}
+        { this.props.postData.data.user == auth.currentUser.email ?   <TouchableOpacity style={styles.borrarButton} onPress={() => this.deletePost()}>
+                          <Text > Borrar Post</Text>
+                      </TouchableOpacity>
+
+                      :
+
+                      <></>}
+      
         {
             !this.state.liked ?
         <TouchableOpacity style={styles.button} onPress={() => this.likePost()}>
@@ -139,7 +150,9 @@ render(){
                 <Text>X</Text>
             </TouchableOpacity>
 
-            <NewCommentForm postData={this.props.postData}/>
+            <NewCommentForm 
+            
+            postData={this.props.postData}/>
         </Modal> 
         }
         </View>
@@ -150,6 +163,18 @@ const styles = StyleSheet.create({
     modal:{height:300,
     width:400}
     ,
+    borrarButton:{
+        alignSelf: 'center',
+        backgroundColor: "red",
+        paddingHorizontal: 10,
+        paddingVertical: 6,
+        textAlign: "center",
+        borderRadius: 4,
+        borderWidth: 1,
+        borderStyle: "solid",
+        borderColor: "black",
+        width:400,
+      },
     foto:{width: 300,
         height: 300,
         alignSelf: 'center',

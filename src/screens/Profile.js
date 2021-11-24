@@ -7,13 +7,13 @@ class Profile extends Component {
   constructor(props) {
     super(props);
       this.state = { 
-        posts: [],
-        resto: []
+       posts:[]
       }  
   }
 
   componentDidMount(){
     this.showPost()
+    console.log(this.state.posts);
   }
 
     showPost() {
@@ -34,16 +34,7 @@ class Profile extends Component {
       })
   }
 
-  deletePost(){
-    let postsAfterDelete = this.state.posts.filter(function(){
-        let id = this.state.posts.postData.data.id
-        return this.props.postData != id
-    })
-
-    this.setState({
-        resto : postsAfterDelete
-    })
-}
+ 
 
   
     render() {
@@ -65,10 +56,9 @@ class Profile extends Component {
                     renderItem={({item}) => 
                     
                     <View>
-                       <TouchableOpacity style={styles.borrarButton} onPress={() => this.deletePost()}>
-                          <Text > Borrar Post</Text>
-                      </TouchableOpacity>
+                  
                       <Post
+                      deletePost={(id)=> this.deletePost(id)}
                       userdata={this.props.userdata}
                         postData={item}
                       />
@@ -93,18 +83,7 @@ class Profile extends Component {
         alignSelf: 'center',
         textDecorationColor: 'blue'
       },
-      borrarButton:{
-        alignSelf: 'center',
-        backgroundColor: "red",
-        paddingHorizontal: 10,
-        paddingVertical: 6,
-        textAlign: "center",
-        borderRadius: 4,
-        borderWidth: 1,
-        borderStyle: "solid",
-        borderColor: "black",
-        width:400,
-      },
+      
         button: {
           backgroundColor: "red",
           paddingHorizontal: 10,
