@@ -59,7 +59,7 @@ class Menu extends Component {
             .then((userData) => {
                 this.setState({
                     loggedIn: true, 
-                    userData: userData.user, 
+                    userData: userData.user,
                 })
             })
             
@@ -82,7 +82,6 @@ class Menu extends Component {
         .catch((err) => {
             this.setState({
                 error: err.message,
-                error2: true
             })
         })
     }

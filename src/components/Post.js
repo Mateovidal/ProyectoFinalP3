@@ -1,5 +1,5 @@
 import React, {Component} from 'react'; 
-import { Text, View, TextInput, TouchableOpacity, StyleSheet,Modal, ActivityIndicator, FlatList, Image } from "react-native";
+import { Text, View, TouchableOpacity, StyleSheet,Modal, Image } from "react-native";
 import { db, auth } from "../firebase/config";
 import firebase from 'firebase';
 import NewCommentForm from '../screens/NewCommentForm';
@@ -17,9 +17,6 @@ constructor(props){
 
 componentDidMount() {
     this.receiveLikes();
-    // this.receiveComments();
-    console.log(this.props.postData)
-    // this.filtrarLikes()
 };
 
 
@@ -35,8 +32,6 @@ receiveLikes(){
             liked: true
         })
     }
-    
-
 }
 
 likePost(){
@@ -105,11 +100,10 @@ closeModal() {
 }
 
 deletePost(){
-//    console.log(this.props.postData);
    db.collection("posteos").doc(this.props.postData.id).delete();
 }
+
 render(){
-    console.log(this.state.likes);
     return(
         <View style={styles.container}>
            
@@ -124,7 +118,7 @@ render(){
             source={this.props.postData.data.photo}></Image>
             <Text style={styles.tituloDesign}> {this.props.postData.data.title}</Text>
             <Text>{this.props.postData.data.description}</Text>
-            <Text>{this.state.likes}</Text>
+            <Text>Likes: {this.state.likes}</Text>
             
         
         { this.props.postData.data.user == auth.currentUser.email ?   <TouchableOpacity style={styles.borrarButton} onPress={() => this.deletePost()}>
@@ -163,7 +157,7 @@ render(){
         animationType="slide"
         transparent={false}
         visible={this.state.showModal}>
-            <TouchableOpacity style={styles.button2} onPress={() => this.closeModal()}>
+            <TouchableOpacity style={styles.buttonDislike} onPress={() => this.closeModal()}>
                 <Text>X</Text>
             </TouchableOpacity>
 
@@ -181,11 +175,8 @@ const styles = StyleSheet.create({
         
         color:"#15d47e",
         textAlign: "center",
-
-        
-        
-
     },
+
     usernameNotMe:{
         color:"#d6a913",
         textAlign: "center",
@@ -207,9 +198,11 @@ const styles = StyleSheet.create({
        
 
     },
-    modal:{height:300,
-    width:400}
-    ,
+    modal:{
+        height:300,
+        width:300,
+        alignSelf: 'center'
+    },
     
     foto:{width: 300,
         height: 300,
@@ -221,13 +214,14 @@ const styles = StyleSheet.create({
         borderWidth: 2,
         backgroundColor:"#fffbeb",
         width: 330,
-        height:500,
+        height:800,
         alignSelf: 'center',
         marginVertical: 15,
         shadowColor: "#ccc",
-        shadowOffset: {
-            width: 0,
-            height: 0,
+
+    shadowOffset: {
+            width: 1,
+            height: 1,
         },
         shadowOpacity: 0.5,
         shadowRadius: 10,
@@ -304,16 +298,16 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
     },
     
-    modalContainer: {
-        width:'100%',  
-        flex: 3,
-        alignSelf: 'center',
-        backgroundColor: "white",
-        borderColor: '#000000',
-        borderRadius: 6,
-        padding: 10,
-        backgroundColor: '#000000'
-    },
+    // modalContainer: {
+    //     width:'100%',  
+    //     flex: 3,
+    //     alignSelf: 'center',
+    //     backgroundColor: "white",
+    //     borderColor: '#000000',
+    //     borderRadius: 6,
+    //     padding: 10,
+    //     backgroundColor: '#000000'
+    // },
     closeModal:{
         alignSelf: 'flex-end',
         padding: 10,

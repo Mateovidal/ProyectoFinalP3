@@ -6,30 +6,39 @@ import {auth} from '../firebase/config'
     constructor(props){
         super(props);
 
-        this.state={
+        this.state= {
             // name: '',
             email: '',
             password: '',
-            username:''
+            username:'',
+            // error: false
         }
     }
-verify(){
-    console.log(this.state.email);
-    console.log(this.state.username);
-    console.log(this.state.password);
-}
+
+    // verificarError(){
+    //     this.setState({
+
+    //     })
+    // }
 
     render() {
         return (
             // el en textInput, con el onchange manejamos los forms
             //le pasamos un text, ese texto se lo cmabiamos al estado del email con el set state, el cual tiene un email, y le pasamos el text
             <View>
+                {this.props.error !== '' 
+                ?
+                <Text>Este mail ya está registrado</Text>
+                :
+                <></>
+                }
+                <TextInput
+                style={styles.input}
+                onChangeText={(textUsername)=>this.setState({username: textUsername})}
+                placeholder = "username"
+                keyboardType="default"
+                />
 
-                {/* <TextInput
-                onChangeText={(text)=>this.setState({name: text})}
-                placeholder = "name"
-                keyboardType="name"
-                />                   */}
                 <TextInput
                 style={styles.input}
                 onChangeText={(textEmail)=>this.setState({email: textEmail})}
@@ -46,12 +55,6 @@ verify(){
                 secureTextEntry={true}
                 />
                 
-                <TextInput
-                style={styles.input}
-                onChangeText={(textUsername)=>this.setState({username: textUsername})}
-                placeholder = "username"
-                keyboardType="email-adress"
-                />
 
             { this.state.email.includes('@', '.com') &&  this.state.username.length >= 1 && this.state.password.length >= 6
             ? 
@@ -62,19 +65,6 @@ verify(){
             <Text style={styles.textButton}>Registrarme</Text>
             </TouchableOpacity>
             : <></> }
-
-
-
-  
-
-                    
-
-                 
-                          
-
-      
-
-                
 
             </View>
 

@@ -17,6 +17,18 @@ import Post from '../components/Post'
         }
     }
 
+    componentDidMount(){
+        this.limpiarSearch()
+    }
+
+    limpiarSearch(){
+        this.setState({
+            searchEmail: '',
+            posts: []
+
+        })
+    }
+
     filtrarUsers(){
 
         db.collection('posteos').where('user','==', this.state.searchEmail)
