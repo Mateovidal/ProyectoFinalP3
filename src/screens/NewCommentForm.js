@@ -59,9 +59,10 @@ class NewCommentForm extends Component {
  return (
       <View style={styles.formContainer}>
         
-        <Text> Comentarios: {this.props.postData.data.comentarios.length} </Text>
+        <Text> Comments: {this.props.postData.data.comentarios.length} </Text>
+       
         {this.props.postData.data.comentarios.length == 0 ?
-        <Text>¡Aún no hay comentarios! Sé el primero en opinar</Text>
+        <Text>¡There are no comments on this post yet! Be the first to comment</Text>
         :
         <FlatList
         data={this.props.postData.data.comentarios}
@@ -74,7 +75,8 @@ class NewCommentForm extends Component {
 />
     
     }
-        <Text> Nuevo Comentario </Text>
+    <Text> </Text>
+        <Text> New Comment: </Text>
         <TextInput
           onChangeText={(text) => this.setState({ comment: text})}
           placeholder="Add a Comment"
@@ -82,7 +84,7 @@ class NewCommentForm extends Component {
           value={this.state.comment}
           style={styles.multilineInput}
         />
-
+<Text> </Text>
         {this.state.comment == '' 
         ? <></> 
         :
@@ -90,7 +92,7 @@ class NewCommentForm extends Component {
         style={styles.buttonSendComment}
         onPress={() => this.submitComment()}
       >
-        <Text > Comentar </Text>
+        <Text > Comment </Text>
         </TouchableOpacity>
         }
        

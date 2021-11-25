@@ -64,17 +64,17 @@ class NewPostForm extends Component {
         <MyCamera hayFotoProp={this.state.hayFotoProp} onImageUpload={(url) => this.onImageUpload(url)} />
       ) : (
       <View style={styles.formContainer}>
-        <Text> Nuevo Post </Text>
+        
         <TextInput
           onChangeText={(text) => this.setState({ title: text})}
-          placeholder="Titulo"
+          placeholder="Caption"
           keyboardType="default"
           value={this.state.title}
           style={styles.multilineInput}
         />
         <TextInput
           onChangeText={(text) => this.setState({ description: text })}
-          placeholder="Descripción"
+          placeholder="Extra info"
           keyboardType="default"
           value={this.state.description}
           multiline
@@ -85,7 +85,7 @@ class NewPostForm extends Component {
           onPress={() => this.submitPost()}
          
         >
-          <Text style={styles.textButton}> Postear </Text>
+          <Text style={styles.textButton}> Post </Text>
         </TouchableOpacity>
       </View>
     );

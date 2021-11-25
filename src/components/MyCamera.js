@@ -85,10 +85,10 @@ class MyCamera extends Component {
                 />
                 <View>
                   <TouchableOpacity style={styles.buttonCamera1} onPress={() => this.savePhoto()}>
-                    <Text>Aceptar</Text>
+                    <Text>Accept</Text>
                   </TouchableOpacity>
                   <TouchableOpacity style={styles.buttonCamera2} onPress={() =>this.dontSavePhoto()}>
-                    <Text>Cancelar</Text>
+                    <Text>Cancel</Text>
                   </TouchableOpacity>
                 </View>
               </>

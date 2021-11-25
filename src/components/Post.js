@@ -122,7 +122,7 @@ render(){
             
         
         { this.props.postData.data.user == auth.currentUser.email ?   <TouchableOpacity style={styles.borrarButton} onPress={() => this.deletePost()}>
-                          <Text style={styles.textButton}> Borrar Post</Text>
+                          <Text style={styles.textButton}> Delete Post</Text>
                       </TouchableOpacity>
 
                       :
