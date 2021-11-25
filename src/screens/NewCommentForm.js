@@ -87,10 +87,10 @@ class NewCommentForm extends Component {
         ? <></> 
         :
         <TouchableOpacity
-        style={styles.button}
+        style={styles.buttonSendComment}
         onPress={() => this.submitComment()}
       >
-        <Text style={styles.textButton}> Comentar </Text>
+        <Text > Comentar </Text>
         </TouchableOpacity>
         }
        
@@ -104,6 +104,23 @@ const styles = StyleSheet.create({
     formContainer:{
         paddingHorizontal:10,
         marginTop: 20,
+    },
+    buttonSendComment: {
+        marginTop: 2,
+        marginBottom: 2,
+        color:"white",
+        
+        backgroundColor: "#02fa97",
+        paddingHorizontal: 10,
+        paddingVertical: 6,
+        textAlign: "center",
+        borderRadius: 20,
+        borderWidth: 1,
+        borderStyle: "solid",
+        borderColor: "black",
+        width: 100,
+        alignSelf: "center"
+        
     },
     multilineInput:{
         height:100,

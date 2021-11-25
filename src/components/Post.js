@@ -157,8 +157,8 @@ render(){
         animationType="slide"
         transparent={false}
         visible={this.state.showModal}>
-            <TouchableOpacity style={styles.buttonDislike} onPress={() => this.closeModal()}>
-                <Text>X</Text>
+            <TouchableOpacity style={styles.buttonCloseModal} onPress={() => this.closeModal()}>
+                <Text style={styles.modalText}>X</Text>
             </TouchableOpacity>
 
             <NewCommentForm 
@@ -172,23 +172,37 @@ render(){
 }}
 const styles = StyleSheet.create({
     usernameMe:{
-        
-        color:"#15d47e",
-        textAlign: "center",
-    },
-
-    usernameNotMe:{
-        color:"#d6a913",
+        color:"black",
         textAlign: "center",
         marginTop: 10,
         marginBottom: 10,
         color:"white",
         
+        backgroundColor: "#ffc400",
+        paddingHorizontal: 10,
+        paddingVertical: 6,
+        textAlign: "center",
+        borderRadius: 8,
+        borderWidth: 1,
+        borderStyle: "solid",
+        borderColor: "black",
+        width: 100,
+        alignSelf: "center"
+        
+    },
+
+    usernameNotMe:{
+        color:"white",
+        textAlign: "center",
+        marginTop: 10,
+        marginBottom: 10,
+        
+        
         backgroundColor: "#8a0e86",
         paddingHorizontal: 10,
         paddingVertical: 6,
         textAlign: "center",
-        borderRadius: 20,
+        borderRadius: 8,
         borderWidth: 1,
         borderStyle: "solid",
         borderColor: "black",
@@ -308,16 +322,23 @@ const styles = StyleSheet.create({
     //     padding: 10,
     //     backgroundColor: '#000000'
     // },
-    closeModal:{
-        alignSelf: 'flex-end',
-        padding: 10,
-        backgroundColor: '#dc3545',
-        marginTop:2,
-        borderRadius: 4,
-        width: 100,
+    buttonCloseModal:{
+        marginTop: 2,
+        marginBottom: 2,
+        color: "#ccc",
+        backgroundColor: "#ff6f00",
+        paddingHorizontal: 10,
+        paddingVertical: 6,
+        textAlign: "center",
+        borderRadius:20,
+        borderWidth: 1,
+        borderStyle: "solid",
+        borderColor: "black",
+        width: 40,
         alignSelf: "center"
     },
     modalText:{
+        alignSelf: "center",
         fontWeight: 'bold',
         color: '#ffffff'
     },

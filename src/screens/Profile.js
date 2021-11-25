@@ -40,15 +40,24 @@ class Profile extends Component {
     render() {
       console.log(this.state.posts);
         return (
-          <View>
-            <Text style={styles.infoProfile}> Email usuario: {auth.currentUser.email} </Text>
-            <Text style={styles.infoProfile}> Username: {this.props.userdata} </Text>
-            <Text style={styles.infoProfile}> Fecha de creación: {auth.currentUser.metadata.creationTime} </Text>
-            <Text style={styles.infoProfile}> Última sesión: {auth.currentUser.metadata.lastSignInTime} </Text>
+          <View style={styles.container}>
             
-            <Text style={styles.infoProfile}>Mis Posteos</Text>
-            <Text style={styles.infoProfile}>Cantidad de posteos: {this.state.posts.length}</Text>
-        
+            <Text style={styles.info1}> ¡Welcome {this.props.userdata}! </Text>
+            <Text> </Text>
+            <Text style={styles.infoProfile}> Your email is: {auth.currentUser.email} </Text>
+            <Text style={styles.infoProfile}> Your account was created {auth.currentUser.metadata.creationTime} </Text>
+            <Text style={styles.infoProfile}> You last login was {auth.currentUser.metadata.lastSignInTime} </Text>
+            <Text> </Text>
+            <TouchableOpacity
+              style={styles.buttonLogout}
+              onPress={() => this.props.logout()}
+            >
+              <Text style={styles.textButton}> Log Out </Text>
+            </TouchableOpacity>
+            <Text> </Text>
+            
+            <Text style={styles.infoProfile}>You have posted {this.state.posts.length} posts already! Keep it up!</Text>
+            <Text style={styles.infoProfile}> Your posts so far:</Text>
             {/* flatlist para mostrar posteos */}
             <FlatList 
                     style = {styles.infoProfile}
@@ -66,20 +75,37 @@ class Profile extends Component {
                     </View>}
                 />
               
-        
+              
             
-            <TouchableOpacity
-              style={styles.button}
-              onPress={() => this.props.logout()}
-            >
-              <Text style={styles.textButton}> Cerrar sesión </Text>
-            </TouchableOpacity>
+            
           </View>
         );
       }
     }
 
     const styles = StyleSheet.create({
+      info1: {
+        fontSize:"large",
+        alignSelf:"center",
+        fontWeight: 'bold',
+    },
+      container:{backgroundColor: "#f5f5f5"},
+      buttonLogout: {
+        marginTop: 2,
+        marginBottom: 2,
+        alignSelf: 'center',
+        backgroundColor: "red",
+        paddingHorizontal: 10,
+        paddingVertical: 6,
+        textAlign: "center",
+        borderRadius: 20,
+        borderWidth: 1,
+        borderStyle: "solid",
+        borderColor: "black",
+        
+        width: 100,
+        alignSelf: "center"
+    },
       infoProfile:{
         alignSelf: 'center',
         textDecorationColor: 'blue',
