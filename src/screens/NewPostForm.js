@@ -59,6 +59,7 @@ class NewPostForm extends Component {
     render() {
 
       console.log(this.props)
+      // si el estado esta en true, q muetsre el componente
       return this.state.showCamera ? (
         <MyCamera hayFotoProp={this.state.hayFotoProp} onImageUpload={(url) => this.onImageUpload(url)} />
       ) : (

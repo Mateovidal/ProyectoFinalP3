@@ -68,12 +68,7 @@ class Profile extends Component {
               
         
             
-            <TouchableOpacity
-              style={styles.button}
-              onPress={() => this.props.logout()}
-            >
-              <Text style={styles.textButton}> Cerrar sesión </Text>
-            </TouchableOpacity>
+           
           </View>
         );
       }
