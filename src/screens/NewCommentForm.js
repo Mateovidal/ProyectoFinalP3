@@ -25,7 +25,7 @@ class NewCommentForm extends Component {
             user: auth.currentUser.email,
             comment: this.state.comment,
             createdAt: Date.now(),
-            //id: this.props.postData.data.comentarios.length + auth.currentUser.email
+           
 
             }
             )
@@ -41,7 +41,7 @@ class NewCommentForm extends Component {
     })
 
     .catch((error) => {
-        // The document probably doesn't exist.
+        
         console.error("Error updating document: ", error);
     });
    

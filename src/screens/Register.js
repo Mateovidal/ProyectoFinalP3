@@ -1,30 +1,24 @@
 import React, { Component } from 'react'
 import { Text, View, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native'
-import {auth} from '../firebase/config'
 
  class Register extends Component {
     constructor(props){
         super(props);
 
         this.state= {
-            // name: '',
+            
             email: '',
             password: '',
             username:'',
-            // error: false
+           
         }
     }
 
-    // verificarError(){
-    //     this.setState({
-
-    //     })
-    // }
+ 
 
     render() {
         return (
-            // el en textInput, con el onchange manejamos los forms
-            //le pasamos un text, ese texto se lo cmabiamos al estado del email con el set state, el cual tiene un email, y le pasamos el text
+           
             <View>
                 {this.props.error !== '' 
                 ?
@@ -68,7 +62,7 @@ import {auth} from '../firebase/config'
 
             </View>
 
-            // el on press llama al metodo register, y le pasamos el emial y el pass, loscuales los guardamos en el estado de cada uno
+            
         );
     }
 }

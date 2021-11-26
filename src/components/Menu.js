@@ -107,7 +107,7 @@ class Menu extends Component {
         console.log(this.state.userData);
         return(
             <NavigationContainer independent={true}> 
-                {/*se puede componentizar el NavigationContainer en app*/}
+                
                 <Drawer.Navigator>
                     {(this.state.loggedIn === false) ? (
                         <>
