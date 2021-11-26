@@ -38,7 +38,7 @@ class Profile extends Component {
 
   
     render() {
-      console.log(this.state.posts);
+      console.log(auth.currentUser.metadata);
         return (
           <View style={styles.container}>
             
@@ -56,7 +56,7 @@ class Profile extends Component {
             </TouchableOpacity>
             <Text> </Text>
             
-            <Text style={styles.infoProfile}>You have posted {this.state.posts.length} posts already! Keep it up!</Text>
+            <Text style={styles.infoProfile}>You have created {this.state.posts.length} post(s) already! Keep it up!</Text>
             <Text style={styles.infoProfile}> Your posts so far:</Text>
             {/* flatlist para mostrar posteos */}
             <FlatList 

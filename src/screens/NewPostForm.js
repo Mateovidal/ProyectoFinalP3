@@ -81,7 +81,7 @@ class NewPostForm extends Component {
           style={styles.multilineInput}
         />
         <TouchableOpacity
-          style={styles.button}
+          style={styles.buttonPost}
           onPress={() => this.submitPost()}
          
         >
@@ -93,6 +93,22 @@ class NewPostForm extends Component {
 }
 
 const styles = StyleSheet.create({
+  buttonPost:{
+    marginTop: 2,
+    marginBottom: 2,
+    color:"white",
+    backgroundColor: "#0ed907",
+    paddingHorizontal: 10,
+    paddingVertical: 6,
+    textAlign: "center",
+    borderRadius: 20,
+    borderWidth: 1,
+    borderStyle: "solid",
+    borderColor: "black",
+    width: 100,
+    alignSelf: "center"
+    
+},
     formContainer:{
         paddingHorizontal:10,
         marginTop: 20,

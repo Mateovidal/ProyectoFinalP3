@@ -62,7 +62,10 @@ class NewCommentForm extends Component {
         <Text> Comments: {this.props.postData.data.comentarios.length} </Text>
        
         {this.props.postData.data.comentarios.length == 0 ?
-        <Text>¡There are no comments on this post yet! Be the first to comment</Text>
+        <>
+        <Text>¡There are no comments on this post yet!</Text>
+        <Text> Be the first one to comment!</Text>
+        </>
         :
         <FlatList
         data={this.props.postData.data.comentarios}

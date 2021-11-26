@@ -53,7 +53,7 @@ import Post from '../components/Post'
         return (
             // el en textInput, con el onchange manejamos los forms
             //le pasamos un text, ese texto se lo cmabiamos al estado del email con el set state, el cual tiene un email, y le pasamos el text
-            <View>
+            <View style={styles.container}>
 
                 <TextInput
                 style={styles.input}
@@ -72,6 +72,7 @@ import Post from '../components/Post'
 
         {this.state.posts.length != 0 ? 
         <FlatList 
+        style = {styles.infoProfile}
         data={this.state.posts}
         keyExtractor={(post) => post.id}
         renderItem={({item}) => 
@@ -80,7 +81,17 @@ import Post from '../components/Post'
             />}
         />
         :
-        <Text>No hay resultados</Text>} 
+        <>
+        <Text> </Text>
+        <Text> </Text>
+        <Text> </Text>
+        <Text style = {styles.infoProfile}>You haven't searched anything yet </Text>
+        <Text style = {styles.infoProfile}> OR  </Text> 
+        <Text style = {styles.infoProfile}>The user you looked for doesn't exist or hasn't posted anything yet!</Text>
+
+        
+</>
+        } 
 
 
             </View>
@@ -91,10 +102,12 @@ import Post from '../components/Post'
 }
 
 const styles = StyleSheet.create({
-    formContainer:{
-        paddingHorizontal:10,
-        marginTop: 20,
-    },
+    infoProfile:{
+        alignSelf: 'center',
+        textDecorationColor: 'blue',
+        textAlign: "center",
+      },
+      container:{backgroundColor: "#f5f5f5"},
     input:{
         height:20,
         paddingVertical:15,

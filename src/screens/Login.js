@@ -9,7 +9,8 @@ import { Text, View, TextInput, TouchableOpacity, StyleSheet, } from "react-nati
 
             email: '', 
             password: '' ,
-            loggedIn: false,            
+            loggedIn: false,   
+            error: this.props.error         
             
         }
     }
@@ -18,7 +19,7 @@ import { Text, View, TextInput, TouchableOpacity, StyleSheet, } from "react-nati
     render() {
         return (
             <View>
-            {this.state.error == true 
+            {this.state.error != "" 
             ?
             <Text> {this.props.error} </Text>
             : <></>}

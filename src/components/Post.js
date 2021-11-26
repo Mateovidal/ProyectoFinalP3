@@ -129,9 +129,9 @@ render(){
 
                       <></>}
       
-        {
-            !this.state.liked ?
-        <TouchableOpacity style={styles.buttonLike} onPress={() => this.likePost()}
+        { !this.state.liked ?
+       
+       <TouchableOpacity style={styles.buttonLike} onPress={() => this.likePost()}
                                                 // onPress={() => this.filtrarLikes()}
                                                 >
             <Text style={styles.textButton}>Like</Text>
@@ -142,6 +142,7 @@ render(){
         <TouchableOpacity style={styles.buttonDislike} onPress={() => this.dislikePost()}>
             <Text style={styles.textButton}>Dislike</Text>
         </TouchableOpacity>
+        
         }
 
         <TouchableOpacity style={styles.buttonComment} onPress={() => this.openModal()}>
